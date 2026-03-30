@@ -31,41 +31,24 @@ export default function Projects() {
   }, [active]);
 
   return (
-    <section
-      className="
-        relative w-full py-20
-        bg-white dark:bg-black
-        transition-colors duration-300
-      "
-    >
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="relative w-full py-20 px-4">
+      <div className="max-w-7xl mx-auto">
 
         {/* Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="
-            text-center text-4xl sm:text-5xl md:text-6xl
-            font-black tracking-tight
-            bg-clip-text text-transparent
-            bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400
-            drop-shadow-[0_0_30px_rgba(45,212,191,0.35)]
-            mb-5
-          "
-        >
-          Projects
-        </motion.h1>
-
-        {/* Divider */}
         <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: "7rem" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mx-auto mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col items-center mb-16"
         >
-          <div className="h-1 w-full bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-full blur-sm" />
-          <div className="h-1 w-full -mt-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-full" />
+          <span className="text-xs font-bold tracking-widest text-primary uppercase mb-3">
+            03. Portfolio
+          </span>
+          <h1 className="text-center text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-4">
+            Featured Projects
+          </h1>
+          <div className="h-1 w-20 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full" />
         </motion.div>
 
         {/* Overlay */}
@@ -75,7 +58,7 @@ export default function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-black/50 dark:bg-black/70 backdrop-blur-sm"
+              className="fixed inset-0 z-40 bg-background/80 backdrop-blur-md"
             />
           )}
         </AnimatePresence>
@@ -83,7 +66,7 @@ export default function Projects() {
         {/* Expanded Modal */}
         <AnimatePresence>
           {active && (
-            <div className="fixed inset-0 z-50 grid place-items-center px-4">
+            <div className="fixed inset-0 z-50 grid place-items-center px-4 py-8">
               <motion.div
                 ref={ref}
                 layoutId={`card-${active.title}-${id}`}
@@ -91,11 +74,11 @@ export default function Projects() {
                   w-full max-w-3xl
                   max-h-[90vh] overflow-y-auto
                   rounded-2xl
-                  bg-white dark:bg-neutral-900
-                  border border-neutral-200 dark:border-neutral-800
+                  bg-card shadow-2xl
+                  border border-border/50
                 "
               >
-                <div className="relative w-full aspect-video">
+                <div className="relative w-full aspect-video border-b border-border/30">
                   <Image
                     src={active.image}
                     alt={active.title}
@@ -103,27 +86,33 @@ export default function Projects() {
                     className="object-cover"
                     priority
                   />
+                  {/* Close button */}
+                  <button 
+                    onClick={() => setActive(null)}
+                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-background/50 backdrop-blur-md border border-border text-foreground hover:bg-background transition-colors"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
                 </div>
 
-                <div className="p-6 space-y-5">
-                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
-                    {active.title}
-                  </h2>
-
-                  <p className="text-neutral-600 dark:text-gray-400">
-                    {active.description}
-                  </p>
+                <div className="p-6 sm:p-8 space-y-6">
+                  <div>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+                      {active.title}
+                    </h2>
+                    <p className="text-muted-foreground mt-2 text-sm sm:text-base">
+                      {active.description}
+                    </p>
+                  </div>
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2">
                     {active.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="
-                          px-3 py-1 text-xs rounded-full
-                          bg-neutral-200 dark:bg-neutral-800
-                          text-neutral-700 dark:text-gray-300
-                        "
+                        className="px-3 py-1.5 text-xs font-medium rounded-md bg-secondary text-secondary-foreground border border-border/30"
                       >
                         {tech}
                       </span>
@@ -131,12 +120,12 @@ export default function Projects() {
                   </div>
 
                   {/* Content */}
-                  <div className="text-sm leading-relaxed space-y-3 text-neutral-700 dark:text-gray-300">
+                  <div className="text-sm sm:text-base leading-relaxed space-y-4 text-muted-foreground">
                     {active.content}
                   </div>
 
                   {/* Links */}
-                  <div className="flex flex-wrap gap-4 pt-4">
+                  <div className="flex flex-wrap gap-4 pt-6 border-t border-border/30">
                     {active.links.map((link) => (
                       <a
                         key={link.label}
@@ -144,12 +133,15 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="
-                          px-4 py-2 rounded-full
-                          bg-teal-600 hover:bg-teal-500
-                          text-sm text-white
+                          px-6 py-2.5 rounded-full font-medium shadow-sm transition-all
+                          bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_15px_var(--color-primary)]
+                          text-sm flex items-center gap-2
                         "
                       >
                         {link.label}
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
                       </a>
                     ))}
                   </div>
@@ -161,40 +153,54 @@ export default function Projects() {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               layoutId={`card-${project.title}-${id}`}
               onClick={() => setActive(project)}
               className="
-                cursor-pointer rounded-xl overflow-hidden
-                bg-white/80 dark:bg-neutral-900
-                border border-neutral-200 dark:border-neutral-800
-                backdrop-blur-md
-                hover:border-teal-500/40
-                transition
+                group cursor-pointer rounded-2xl overflow-hidden
+                bg-card/50 backdrop-blur-sm
+                border border-border shadow-sm
+                hover:border-primary/50 hover:shadow-[0_10px_40px_-10px_var(--color-primary)]
+                transition-all duration-300 flex flex-col h-full
               "
             >
-              <div className="relative w-full aspect-video">
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-10 transition-opacity duration-300 mix-blend-overlay" />
               </div>
 
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-sm text-neutral-600 dark:text-gray-400 mt-2">
+                <p className="text-sm text-muted-foreground mt-3 flex-grow line-clamp-2 leading-relaxed">
                   {project.description}
                 </p>
 
-                <span className="inline-block mt-4 text-sm text-teal-500 font-medium">
-                  View Details →
-                </span>
+                <div className="mt-6 flex items-center text-sm font-semibold text-primary">
+                  View Case Study
+                  <motion.svg 
+                    className="w-4 h-4 ml-2" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </motion.svg>
+                </div>
               </div>
             </motion.div>
           ))}

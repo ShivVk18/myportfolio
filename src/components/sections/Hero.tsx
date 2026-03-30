@@ -1,154 +1,124 @@
 "use client";
 
-import { Spotlight } from "@/components/ui/spotlight-new";
 import { motion } from "motion/react";
 
 export const Hero = () => {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden px-4 sm:px-6
-      bg-white dark:bg-black transition-colors duration-300"
-    >
-      {/* Spotlights */}
-      <Spotlight
-        className="-top-52 left-0 sm:left-40 sm:-top-20 opacity-40 sm:opacity-70"
-       
-      />
-      <Spotlight
-        className="top-20 left-full h-[40vh] w-[40vw] sm:h-[60vh] sm:w-[60vw] hidden sm:block opacity-50"
-       
-      />
-      <Spotlight
-        className="left-40 top-40 h-[40vh] w-[40vw] sm:h-[60vh] sm:w-[60vw] hidden sm:block opacity-40"
-       
-      />
-
-      {/* Grid Overlay */}
-      <div className="absolute inset-0
-        bg-[linear-gradient(rgba(45,212,191,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(45,212,191,0.04)_1px,transparent_1px)]
-        dark:bg-[linear-gradient(rgba(45,212,191,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(45,212,191,0.03)_1px,transparent_1px)]
-        bg-[size:72px_72px]
-        [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]
-      " />
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center max-w-3xl">
-        
-        {/* Name */}
+    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden px-4 sm:px-6">
+      
+      {/* Liquid Aurora Background Effect */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="
-            text-4xl sm:text-6xl md:text-7xl lg:text-8xl
-            font-black tracking-tight
-            bg-clip-text text-transparent
-            bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400
-            drop-shadow-[0_0_30px_rgba(45,212,191,0.35)]
-          ">
-            Shivansh Saxena
-          </h1>
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-r from-primary/30 via-secondary/20 to-accent/30 blur-[120px] mix-blend-screen opacity-50 dark:opacity-40"
+        />
+        <motion.div
+          animate={{
+            rotate: [360, 0],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-l from-primary/20 via-accent/30 to-secondary/20 blur-[120px] mix-blend-screen opacity-50 dark:opacity-40"
+        />
+        <div className="absolute inset-0 bg-background/40 backdrop-blur-[50px] mix-blend-overlay" />
+      </div>
 
-          <div className="h-1 w-20 sm:w-28 mx-auto mt-4 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-full blur-sm" />
-          <div className="h-1 w-20 sm:w-28 mx-auto -mt-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-full" />
+      {/* Content Container */}
+      <div className="relative z-10 flex flex-col items-center text-center max-w-5xl mx-auto pt-20">
+        
+        {/* Availability Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-8 px-4 py-2 rounded-full border border-primary/20 bg-background/50 backdrop-blur-md flex items-center gap-2 group cursor-default shadow-sm"
+        >
+          <div className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+          </div>
+          <span className="text-xs sm:text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors">
+            Available for new opportunities
+          </span>
         </motion.div>
 
-        {/* Role Badge */}
+        {/* Main Headline */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="
-            mt-6 px-4 sm:px-5 py-2
-            bg-teal-500/10 dark:bg-teal-500/15
-            backdrop-blur-xl rounded-full
-            border border-teal-400/30
-          "
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative"
         >
-          <span className="text-xs sm:text-sm md:text-base font-semibold text-teal-600 dark:text-teal-200 tracking-wide">
-            FULL STACK DEVELOPER
-          </span>
+          <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-[1.1] sm:leading-none bg-clip-text text-transparent bg-gradient-to-b from-foreground via-foreground/90 to-muted-foreground drop-shadow-sm pb-4">
+            Shivansh Saxena
+          </h1>
+          
+          {/* Subtle Glow Behind Text */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[50%] bg-primary/20 blur-[100px] -z-10 rounded-full mix-blend-screen opacity-50" />
+        </motion.div>
+
+        {/* Role Tagline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="mt-2 sm:mt-6 overflow-hidden"
+        >
+          <h2 className="text-lg sm:text-2xl md:text-3xl font-light text-muted-foreground tracking-wide">
+            Crafting <span className="font-semibold text-foreground">Digital Excellence</span> through Code
+          </h2>
         </motion.div>
 
         {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg
-            text-neutral-700 dark:text-neutral-300 leading-relaxed"
+          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+          className="mt-6 sm:mt-8 text-sm sm:text-lg text-muted-foreground/80 max-w-2xl leading-relaxed mx-auto font-medium"
         >
-          Crafting{" "}
-          <span className="text-amber-500 dark:text-amber-300 bg-amber-400/10 px-1 rounded font-semibold">
-            stunning
-          </span>{" "}
-          digital experiences with{" "}
-          <span className="text-amber-500 dark:text-amber-300 bg-amber-400/10 px-1 rounded font-semibold">
-            cutting-edge
-          </span>{" "}
-          technology and{" "}
-          <span className="text-amber-500 dark:text-amber-300 bg-amber-400/10 px-1 rounded font-semibold">
-            pixel-perfect
-          </span>{" "}
-          design
+          I build scalable web applications with a focus on performance, aesthetic design, and exceptional user experiences. Transforming complex problems into elegant interfaces.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 mt-10 w-full sm:w-auto"
+          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-12 w-full sm:w-auto items-center justify-center perspective-[1000px]"
         >
           <motion.a
             href="/Shivansh_Saxena_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="
-              w-full sm:w-auto px-8 py-4
-              bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500
-              text-slate-900 rounded-full font-bold
-              text-base sm:text-lg shadow-lg text-center
-            "
+            whileHover={{ scale: 1.02, translateY: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative w-full sm:w-auto overflow-hidden rounded-full bg-primary text-primary-foreground font-semibold text-base sm:text-lg py-4 px-10 shadow-[0_0_40px_-10px_var(--color-primary)] transition-shadow hover:shadow-[0_0_60px_-10px_var(--color-primary)]"
           >
-            Get Resume
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              View Resume
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+            {/* Glossy overlay effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
           </motion.a>
 
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="
-              w-full sm:w-auto px-8 py-4
-              border-2 border-teal-400/60
-              text-teal-600 dark:text-teal-300
-              rounded-full font-bold
-              text-base sm:text-lg
-              hover:bg-teal-500/10
-              relative group
-            "
+            whileHover={{ scale: 1.02, translateY: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative w-full sm:w-auto rounded-full bg-secondary text-secondary-foreground border border-border/50 font-semibold text-base sm:text-lg py-4 px-10 hover:bg-secondary/80 transition-colors"
           >
-            Get in Touch
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              Get in Touch
+            </span>
           </motion.button>
         </motion.div>
-
-        {/* Footer Info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="flex flex-col sm:flex-row gap-4 sm:gap-8 mt-12 text-neutral-600 dark:text-neutral-400 text-sm"
-        >
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span>Available for work</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>📍</span>
-            <span>India</span>
-          </div>
-        </motion.div>
+        
       </div>
     </div>
   );

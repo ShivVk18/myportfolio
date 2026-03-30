@@ -18,7 +18,6 @@ const frontend: Skill[] = [
   { label: "ReactJS", image: react, sublabel: "Frontend" },
   { label: "NextJS", image: nextjs, sublabel: "Frontend" },
   { label: "Tailwind CSS", image: tailwind, sublabel: "Frontend" },
-  
 ]
 
 const backend: Skill[] = [
@@ -35,53 +34,42 @@ function SkillCard({ skill, index }: { skill: Skill; index: number }) {
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{
         delay: index * 0.05,
-        duration: 0.35,
+        duration: 0.4,
         ease: "easeOut",
       }}
-      whileHover={{ y: -4 }}
+      whileHover={{ y: -6, scale: 1.02 }}
+      className="group"
     >
-      <div
-        className="
-          w-[110px] h-[110px] sm:w-[120px] sm:h-[120px]
-          flex flex-col items-center justify-center gap-3
-          rounded-xl
-          bg-white/70 dark:bg-zinc-900/70
-          border border-neutral-200 dark:border-zinc-800
-          backdrop-blur-md
-          transition-all duration-300
-          hover:border-teal-500/40
-        "
-      >
-        {/* Icon */}
-        <div
-          className="
-            flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14
-            rounded-lg
-            bg-neutral-200/60 dark:bg-zinc-800/60
-          "
-        >
+      <div className="w-[100px] h-[100px] sm:w-[130px] sm:h-[130px] flex flex-col items-center justify-center gap-2 sm:gap-3 rounded-2xl bg-card border border-border shadow-sm backdrop-blur-md transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:group-hover:shadow-[0_8px_30px_var(--color-primary)]">
+        {/* Icon Container */}
+        <div className="flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16 rounded-xl bg-background border border-border/50 group-hover:bg-primary/10 transition-colors duration-300">
           {skill.image ? (
             <Image
               src={skill.image}
               alt={skill.label}
-              width={32}
-              height={32}
-              className="object-contain max-w-[32px] max-h-[32px]"
+              width={36}
+              height={36}
+              className="object-contain max-w-[24px] max-h-[24px] sm:max-w-[40px] sm:max-h-[40px] drop-shadow-sm group-hover:scale-110 transition-transform duration-300"
             />
           ) : (
-            <span className="font-semibold text-neutral-800 dark:text-white">
+            <span className="font-semibold text-foreground text-lg sm:text-xl">
               {skill.label.charAt(0)}
             </span>
           )}
         </div>
 
-        {/* Label */}
-        <h3 className="text-xs sm:text-sm font-medium text-neutral-700 dark:text-gray-200 text-center">
-          {skill.label}
-        </h3>
+        {/* Label Container */}
+        <div className="flex flex-col items-center gap-0.5">
+          <h3 className="text-xs sm:text-sm font-medium text-foreground tracking-wide text-center group-hover:text-primary transition-colors">
+            {skill.label}
+          </h3>
+          <span className="text-[10px] text-muted-foreground uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+            {skill.sublabel}
+          </span>
+        </div>
       </div>
     </motion.div>
   );
@@ -94,83 +82,43 @@ export function Skills() {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" })
 
   return (
-    <section
-      className="
-        relative w-full min-h-screen overflow-hidden
-        bg-white dark:bg-black
-        py-20 md:py-32
-        transition-colors duration-300
-      "
-    >
-      {/* Background */}
-      <div className="absolute inset-0">
-        {/* Grid */}
-        <div
-          className="
-            absolute inset-0
-            bg-[linear-gradient(rgba(45,212,191,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(45,212,191,0.04)_1px,transparent_1px)]
-            dark:bg-[linear-gradient(rgba(45,212,191,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(45,212,191,0.02)_1px,transparent_1px)]
-            bg-[size:80px_80px]
-          "
-        />
-
-        {/* Orbs */}
+    <section className="relative w-full min-h-screen py-20 md:py-32 overflow-hidden">
+      {/* Background Orbs */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center">
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="
-            absolute top-1/4 left-1/4
-            w-[300px] h-[300px] sm:w-[500px] sm:h-[500px]
-            bg-teal-500/20 rounded-full blur-3xl
-          "
+          className="absolute top-1/4 left-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-primary/10 rounded-full blur-[100px]"
         />
         <motion.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.3, 0.15] }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="
-            absolute bottom-1/4 right-1/4
-            w-[300px] h-[300px] sm:w-[500px] sm:h-[500px]
-            bg-emerald-500/20 rounded-full blur-3xl
-          "
+          className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-secondary/20 rounded-full blur-[100px]"
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           ref={headerRef}
           initial={{ opacity: 0, y: -30 }}
           animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-16 flex flex-col items-center"
         >
-          <h1
-            className="
-              text-4xl sm:text-5xl md:text-6xl
-              font-black tracking-tight
-              bg-clip-text text-transparent
-              bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400
-              drop-shadow-[0_0_30px_rgba(45,212,191,0.35)]
-              mb-4
-            "
-          >
-            Skills
+          <span className="text-xs font-bold tracking-widest text-primary uppercase mb-3">
+            02. Tech Stack
+          </span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-4">
+            Arsenal
           </h1>
 
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "7rem" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mx-auto"
-          >
-            <div className="h-1 w-full bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-full blur-sm" />
-            <div className="h-1 w-full -mt-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-full" />
-          </motion.div>
+          <div className="h-1 w-20 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full" />
         </motion.div>
 
         {/* Skills Grid */}
         <div className="mx-auto max-w-4xl">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 place-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 place-items-center">
             {allSkills.map((skill, index) => (
               <SkillCard key={skill.label} skill={skill} index={index} />
             ))}
@@ -183,17 +131,17 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-20 flex flex-wrap justify-center items-center gap-8"
+          className="mt-16 sm:mt-24 py-4 sm:py-6 px-6 sm:px-8 rounded-full border border-border bg-card/50 backdrop-blur-md mx-auto w-fit flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-6 shadow-sm"
         >
-          <span className="text-neutral-600 dark:text-gray-400 text-sm">
-            10+ Technologies
+          <span className="text-muted-foreground font-medium text-xs sm:text-sm">
+            <strong className="text-foreground">10+</strong> Technologies
           </span>
-          <span className="hidden sm:block w-px h-4 bg-neutral-300 dark:bg-gray-800" />
-          <span className="text-neutral-600 dark:text-gray-400 text-sm">
-            3 Categories
+          <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-border" />
+          <span className="text-muted-foreground font-medium text-xs sm:text-sm">
+            <strong className="text-foreground">3</strong> Categories
           </span>
-          <span className="hidden sm:block w-px h-4 bg-neutral-300 dark:bg-gray-800" />
-          <span className="text-teal-500 dark:text-teal-400 text-sm font-semibold">
+          <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-border" />
+          <span className="text-primary font-bold text-xs sm:text-sm uppercase tracking-wide">
             Always Learning
           </span>
         </motion.div>

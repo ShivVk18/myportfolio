@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
-import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 
 interface PreloaderProps {
@@ -13,19 +12,26 @@ const PortfolioPreloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
+    // Easing-based fake loading progress
+    const start = Date.now();
+    const duration = 2500; // 2.5 seconds total
+
     const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(() => {
-            setDone(true);
-            onComplete?.();
-          }, 700);
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, 40);
+      const timePassed = Date.now() - start;
+      let rawProgress = (timePassed / duration) * 100;
+
+      if (rawProgress > 100) rawProgress = 100;
+
+      setProgress(Math.floor(rawProgress));
+
+      if (rawProgress >= 100) {
+        clearInterval(timer);
+        setTimeout(() => {
+          setDone(true);
+          onComplete?.();
+        }, 600); // Hold at 100% briefly before resolving
+      }
+    }, 30);
 
     return () => clearInterval(timer);
   }, [onComplete]);
@@ -33,176 +39,69 @@ const PortfolioPreloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   if (done) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 1.05 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="
-        fixed inset-0 z-50 flex items-center justify-center overflow-hidden
-        bg-white dark:bg-black
-        transition-colors duration-300
-      "
-    >
-      {/* GRID OVERLAY */}
-      <div
-        className="
-          absolute inset-0
-          bg-[linear-gradient(rgba(45,212,191,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(45,212,191,0.035)_1px,transparent_1px)]
-          dark:bg-[linear-gradient(rgba(45,212,191,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(45,212,191,0.025)_1px,transparent_1px)]
-          bg-[size:80px_80px]
-          [mask-image:radial-gradient(ellipse_70%_45%_at_50%_50%,black,transparent)]
-        "
-      />
-
-      {/* LEFT CODE */}
-      <div className="absolute top-24 left-4 sm:left-10 space-y-2 text-xs font-mono text-teal-500/25 dark:text-teal-300/25">
-        {["<Developer />", "const loading = true;", "import { vision } from 'react';"].map(
-          (line, i) => (
+    <AnimatePresence>
+      <motion.div
+        exit={{ opacity: 0, filter: "blur(10px)", transition: { duration: 0.8, ease: "easeInOut" } }}
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background overflow-hidden"
+      >
+        <div className="flex flex-col items-center gap-8 px-4 w-full max-w-sm sm:max-w-md relative z-10">
+          
+          {/* Typographic Counter */}
+          <div className="relative overflow-hidden flex justify-center w-full">
             <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.2, duration: 0.5 }}
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="font-heading text-8xl sm:text-[10rem] font-black tracking-tighter text-foreground tabular-nums leading-none"
             >
-              {line}
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                {progress < 10 ? `0${progress}` : progress}
+              </motion.span>
+              <span className="text-4xl sm:text-6xl text-muted-foreground/50 absolute bottom-4 sm:bottom-6 ml-1">%</span>
             </motion.div>
-          )
-        )}
-      </div>
+          </div>
 
-      {/* RIGHT CODE */}
-      <div className="absolute bottom-24 right-4 sm:right-10 space-y-2 text-xs font-mono text-emerald-500/25 dark:text-emerald-300/25 text-right">
-        {["// crafting products", "export default Portfolio;", "</>"].map(
-          (line, i) => (
+          {/* Minimalist Loading Bar */}
+          <div className="w-full relative">
+            <div className="w-full h-[1px] sm:h-[2px] bg-border relative overflow-hidden rounded-full">
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: progress / 100 }}
+                style={{ transformOrigin: "left" }}
+                transition={{ duration: 0.1, ease: "linear" }}
+                className="absolute inset-0 bg-foreground h-full rounded-full"
+              />
+            </div>
+            
+            {/* Subtle glow on the loading bar */}
             <motion.div
-              key={i}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.2 + 0.3, duration: 0.5 }}
-            >
-              {line}
-            </motion.div>
-          )
-        )}
-      </div>
-
-      {/* CENTER */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-full px-4">
-
-        {/* ORBIT RINGS */}
-        <div className="absolute w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] md:w-[420px] md:h-[420px] pointer-events-none">
-          {[0, 18, 36].map((offset, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                inset: `${offset}px`,
-                border: `1px solid rgba(45,212,191,${0.2 - i * 0.05})`,
-              }}
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 40 - i * 8,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* AMBIENT GLOW */}
-        <motion.div
-          className="
-            absolute w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80
-            rounded-full
-            bg-gradient-to-r from-teal-400/25 via-emerald-400/25 to-cyan-400/25
-            blur-[110px]
-          "
-          animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.55, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* LOGO */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1, y: [0, -4, 0] }}
-          transition={{
-            opacity: { delay: 0.6, duration: 0.6 },
-            scale: { delay: 0.6, duration: 0.6 },
-            y: { delay: 1.2, duration: 5, repeat: Infinity, ease: "easeInOut" },
-          }}
-          className="relative mb-10"
-        >
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
-            <Image
-              src="/images/logo.png"
-              alt="Portfolio Logo"
-              fill
-              priority
-              className="object-contain drop-shadow-[0_0_40px_rgba(45,212,191,0.7)]"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-4 bg-primary/20 blur-md pointer-events-none rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.1, ease: "linear" }}
             />
           </div>
-        </motion.div>
 
-        {/* STATUS TEXT */}
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.4 }}
-          className="
-            text-xl sm:text-2xl md:text-3xl font-semibold
-            bg-clip-text text-transparent
-            bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400
-          "
-        >
-          {progress < 40 && "Initializing"}
-          {progress >= 40 && progress < 80 && "Loading"}
-          {progress >= 80 && "Almost Ready"}
-          <motion.span
-            className="inline-block ml-1"
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity }}
+          {/* Status Label */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="flex w-full justify-between items-center text-[10px] sm:text-xs font-semibold tracking-widest text-muted-foreground uppercase"
           >
-            ...
-          </motion.span>
-        </motion.h1>
-
-        {/* PROGRESS BAR */}
-        <div className="mt-8 w-56 sm:w-64 md:w-72">
-          <div className="h-[2px] bg-black/10 dark:bg-white/5 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: progress / 100 }}
-              style={{ transformOrigin: "left" }}
-              transition={{ duration: 0.25 }}
-            />
-          </div>
+            <span>Loading Experience</span>
+            <span>{progress === 100 ? "System Ready" : "Please Wait"}</span>
+          </motion.div>
         </div>
 
-        {/* PERCENT */}
-        <motion.div
-          key={progress}
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 0.2 }}
-          className="mt-3 text-sm sm:text-base font-medium text-teal-500/80 dark:text-teal-300/80"
-        >
-          {progress}%
-        </motion.div>
-      </div>
-
-      {/* SCANLINES */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
-        <motion.div
-          className="w-full h-full"
-          animate={{ y: ["0%", "100%"] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(45,212,191,0.25) 2px, rgba(45,212,191,0.25) 4px)",
-          }}
-        />
-      </div>
-    </motion.div>
+        {/* Ambient subtle background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
