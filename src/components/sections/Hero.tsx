@@ -91,7 +91,7 @@ export const Hero = () => {
           className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-12 w-full sm:w-auto items-center justify-center perspective-[1000px]"
         >
           <motion.a
-            href="/Shivansh_Saxena_Resume.pdf"
+            href="/Shivansh-CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.02, translateY: -2 }}
