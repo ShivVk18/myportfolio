@@ -3,7 +3,7 @@
 import { motion, useInView } from "motion/react"
 import { useRef } from "react"
 import Image from "next/image"
-import { cplus, express, javascript, mongo, nextjs, node, postgre, python, react, tailwind } from "../../../public/images"
+import { cplus, express, javascript, mongo, nextjs, node, postgre, python, react, tailwind ,fastapi} from "../../../public/images"
 import type { StaticImageData } from "next/image";
 
 type Skill = { label: string; image?:StaticImageData; sublabel?: string }
@@ -23,8 +23,10 @@ const frontend: Skill[] = [
 const backend: Skill[] = [
   { label: "Node.js", image: node, sublabel: "Backend" },
   { label: "Express", image: express, sublabel: "Backend" },
+  { label: "FastApi", image: fastapi, sublabel: "Backend" },
   { label: "MongoDB", image: mongo, sublabel: "Backend" },
   { label: "PostgreSQL", image: postgre, sublabel: "Backend" },
+
 ]
 
 const allSkills = [...languages, ...frontend, ...backend]

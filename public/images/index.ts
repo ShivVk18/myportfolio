@@ -12,6 +12,7 @@ import tailwind from './tailwind.png'
 import splitmates from './Splitmates.png'
 import emptrack from './emptrack.png'
 import ascendai from './AscendAi.png'
+import fastapi from './FastAPI (1).png'
 export {
     profilePic,
     express,
@@ -26,5 +27,6 @@ export {
     tailwind,
     splitmates,
     ascendai,
-    emptrack
+    emptrack,
+    fastapi
 }
