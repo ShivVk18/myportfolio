@@ -78,6 +78,21 @@ const AboutMe = () => {
                 <span className="text-foreground font-semibold">clean architecture</span>,{" "}
                 efficient APIs, and thoughtful UI/UX while continuously learning and keeping up with the bleeding edge of web technologies.
               </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="text-base sm:text-lg leading-relaxed text-muted-foreground"
+              >
+                Currently, I am deep diving into{" "}
+                <span className="text-foreground font-semibold">Python</span>,{" "}
+                <span className="text-foreground font-semibold">LangGraph</span>,{" "}
+                <span className="text-foreground font-semibold">AI/ML</span>,{" "}
+                <span className="text-foreground font-semibold">FastAPI</span>, and{" "}
+                <span className="text-foreground font-semibold">iOS Development</span> to expand my technical horizons and build more robust, intelligent systems.
+              </motion.p>
             </div>
 
             {/* Social */}
