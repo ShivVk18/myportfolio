@@ -1,20 +1,23 @@
 "use client";
 
 import React, { useEffect, useId, useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { ascendai, emptrack, splitmates } from "../../../public/images";
+import { ascendai, fitfusion, splitmates } from "../../../public/images";
+import { Terminal, ExternalLink, Github, ArrowRight, MousePointer } from "lucide-react";
 
 /* ---------------- TYPES ---------------- */
 
 type Project = {
   title: string;
+  subtitle: string;
   description: string;
   image: StaticImageData;
   techStack: string[];
   links: { label: string; url: string }[];
   content: React.ReactNode;
+  tagInline: string;
 };
 
 /* ---------------- COMPONENT ---------------- */
@@ -31,34 +34,37 @@ export default function Projects() {
   }, [active]);
 
   return (
-    <section className="relative w-full py-20 px-4">
+    <section id="projects" className="relative w-full py-24 px-4 sm:px-8 md:pl-28 lg:pl-32 lg:pr-16">
       <div className="max-w-7xl mx-auto">
 
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-col items-center mb-16"
-        >
-          <span className="text-xs font-bold tracking-widest text-primary uppercase mb-3">
-            03. Portfolio
-          </span>
-          <h1 className="text-center text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-4">
-            Featured Projects
-          </h1>
-          <div className="h-1 w-20 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full" />
-        </motion.div>
+        {/* Asymmetric Section Header */}
+        <div className="flex flex-col items-start mb-16 relative">
+          <div className="flex items-center gap-2 font-mono text-xs text-primary uppercase tracking-widest mb-3">
+            <Terminal className="w-3.5 h-3.5" />
+            <span>{"// 03. FEATURED_PROJECTS.ts"}</span>
+          </div>
 
-        {/* Overlay */}
+          <motion.h2
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="font-heading text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-muted-foreground uppercase"
+          >
+            Live <span className="text-primary">Products</span>
+          </motion.h2>
+
+          <div className="h-1 w-28 bg-gradient-to-r from-primary via-violet-400 to-transparent rounded-full mt-4" />
+        </div>
+
+        {/* Expanded Modal Overlay */}
         <AnimatePresence>
           {active && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-background/80 backdrop-blur-md"
+              className="fixed inset-0 z-40 bg-background/85 backdrop-blur-xl"
             />
           )}
         </AnimatePresence>
@@ -66,19 +72,39 @@ export default function Projects() {
         {/* Expanded Modal */}
         <AnimatePresence>
           {active && (
-            <div className="fixed inset-0 z-50 grid place-items-center px-4 py-8">
+            <div className="fixed inset-0 z-50 grid place-items-center px-4 py-8 overflow-y-auto">
               <motion.div
                 ref={ref}
                 layoutId={`card-${active.title}-${id}`}
                 className="
                   w-full max-w-3xl
                   max-h-[90vh] overflow-y-auto
-                  rounded-2xl
+                  rounded-3xl
                   bg-card shadow-2xl
-                  border border-border/50
+                  border border-primary/40
+                  font-sans
                 "
               >
-                <div className="relative w-full aspect-video border-b border-border/30">
+                {/* Modal Top Bar */}
+                <div className="flex items-center justify-between px-6 py-4 bg-secondary/50 border-b border-border/50">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-rose-500" />
+                    <div className="w-3 h-3 rounded-full bg-amber-500" />
+                    <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                    <span className="ml-2 font-mono text-xs text-muted-foreground">
+                      project_preview.tsx
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => setActive(null)}
+                    className="w-8 h-8 flex items-center justify-center rounded-full bg-background border border-border text-foreground hover:bg-secondary transition-colors"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="relative w-full aspect-video border-b border-border/30 overflow-hidden">
                   <Image
                     src={active.image}
                     alt={active.title}
@@ -86,20 +112,14 @@ export default function Projects() {
                     className="object-cover"
                     priority
                   />
-                  {/* Close button */}
-                  <button 
-                    onClick={() => setActive(null)}
-                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-background/50 backdrop-blur-md border border-border text-foreground hover:bg-background transition-colors"
-                  >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
                 </div>
 
                 <div className="p-6 sm:p-8 space-y-6">
                   <div>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+                    <span className="text-xs font-mono text-primary font-bold uppercase tracking-wider">
+                      {active.subtitle}
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-1">
                       {active.title}
                     </h2>
                     <p className="text-muted-foreground mt-2 text-sm sm:text-base">
@@ -112,19 +132,19 @@ export default function Projects() {
                     {active.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1.5 text-xs font-medium rounded-md bg-secondary text-secondary-foreground border border-border/30"
+                        className="px-3 py-1.5 text-xs font-mono rounded-lg bg-secondary text-secondary-foreground border border-border/50"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  {/* Content */}
-                  <div className="text-sm sm:text-base leading-relaxed space-y-4 text-muted-foreground">
+                  {/* Content / Bullets */}
+                  <div className="text-sm sm:text-base leading-relaxed text-muted-foreground font-sans">
                     {active.content}
                   </div>
 
-                  {/* Links */}
+                  {/* External Links */}
                   <div className="flex flex-wrap gap-4 pt-6 border-t border-border/30">
                     {active.links.map((link) => (
                       <a
@@ -133,15 +153,18 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="
-                          px-6 py-2.5 rounded-full font-medium shadow-sm transition-all
-                          bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_15px_var(--color-primary)]
-                          text-sm flex items-center gap-2
+                          px-6 py-2.5 rounded-xl font-medium shadow-md transition-all
+                          bg-primary text-primary-foreground hover:bg-primary/90
+                          text-sm flex items-center gap-2 font-mono
                         "
+                        data-cursor="pointer"
                       >
-                        {link.label}
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                        {link.label.includes("GitHub") ? (
+                          <Github className="w-4 h-4" />
+                        ) : (
+                          <ExternalLink className="w-4 h-4" />
+                        )}
+                        <span>{link.label}</span>
                       </a>
                     ))}
                   </div>
@@ -151,55 +174,87 @@ export default function Projects() {
           )}
         </AnimatePresence>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Staggered Entrance Cards Grid (Left 0ms, Center 100ms, Right 200ms) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 35 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }} // 100ms staggered entrance
               layoutId={`card-${project.title}-${id}`}
               onClick={() => setActive(project)}
               className="
-                group cursor-pointer rounded-2xl overflow-hidden
-                bg-card/50 backdrop-blur-sm
-                border border-border shadow-sm
-                hover:border-primary/50 hover:shadow-[0_10px_40px_-10px_var(--color-primary)]
-                transition-all duration-300 flex flex-col h-full
+                group cursor-pointer rounded-3xl overflow-hidden
+                bg-card/70 backdrop-blur-xl
+                border border-border/70 hover:border-primary
+                hover:shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.25)]
+                hover:scale-[1.02]
+                transition-all duration-500 flex flex-col h-full relative
               "
+              data-cursor="pointer"
             >
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
+              {/* Card Top Mockup Header Bar */}
+              <div className="flex items-center justify-between px-4 py-2.5 bg-secondary/40 border-b border-border/40 font-mono text-[11px] text-muted-foreground">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                </div>
+                <span>0{index + 1}.app</span>
+              </div>
+
+              {/* Image Container with Ken Burns Hover Pan & Cursor Motion */}
+              <div className="relative w-full aspect-[16/10] overflow-hidden bg-background">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:translate-x-1 group-hover:translate-y-[-2%]"
                 />
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-10 transition-opacity duration-300 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-80" />
+
+                {/* Animated UI Cursor Overlay Simulation on Hover */}
+                <motion.div
+                  animate={{
+                    x: [0, 15, -10, 0],
+                    y: [0, -10, 8, 0],
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-1/3 left-1/3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                >
+                  <div className="flex items-center gap-1 bg-primary text-primary-foreground text-[10px] font-mono px-2 py-0.5 rounded-full shadow-lg">
+                    <MousePointer className="w-3 h-3 fill-current" />
+                    <span>Live Preview</span>
+                  </div>
+                </motion.div>
               </div>
 
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-3 flex-grow line-clamp-2 leading-relaxed">
+              {/* Card Body */}
+              <div className="p-6 flex flex-col flex-grow space-y-4">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs font-mono text-muted-foreground/80 mt-1">
+                    {project.subtitle}
+                  </p>
+                </div>
+
+                <p className="text-sm text-muted-foreground flex-grow line-clamp-3 leading-relaxed">
                   {project.description}
                 </p>
 
-                <div className="mt-6 flex items-center text-sm font-semibold text-primary">
-                  View Case Study
-                  <motion.svg 
-                    className="w-4 h-4 ml-2" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </motion.svg>
+                {/* Tech Tag Context Row under description */}
+                <div className="pt-1 text-xs font-mono text-primary/90 font-semibold border-t border-border/30">
+                  {project.tagInline}
+                </div>
+
+                {/* "View Case Study" with 4px Translate Animation on Hover */}
+                <div className="pt-2 flex items-center text-xs font-mono font-bold text-primary">
+                  <span>VIEW CASE STUDY</span>
+                  <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
             </motion.div>
@@ -214,9 +269,11 @@ export default function Projects() {
 
 const projects: Project[] = [
   {
-    title: "AscendAI — AI Career Coach",
+    title: "AscendAi — AI Career Coach",
+    subtitle: "Personalized Roadmaps & Mock Interviews",
     description:
-      "AI-powered platform for career roadmaps, resumes, and interview prep.",
+      "AI-powered platform for career roadmaps, skill gap analysis, resume building, and mock interviews.",
+    tagInline: "Next.js · Prisma · PostgreSQL · Gemini API · Clerk",
     image: ascendai,
     techStack: [
       "Next.js",
@@ -233,51 +290,54 @@ const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/ShivVk18/ai-career-buddy" },
     ],
     content: (
-      <>
-        <p>
-          Built an AI-driven career coaching platform that generates
-          personalized career roadmaps and resumes using real job postings.
-        </p>
-        <p>
-          Integrated mock interviews with AI feedback to improve performance.
-        </p>
-      </>
+      <ul className="list-disc pl-5 space-y-3">
+        <li>
+          Developed an AI-powered career guidance platform that generates personalized career roadmaps, performs skill gap analysis, and creates tailored resumes by matching user profiles with real-world job descriptions.
+        </li>
+        <li>
+          Integrated AI-driven mock interview simulations with real-time, personalized feedback to enhance users&apos; technical responses, communication skills, and overall interview readiness.
+        </li>
+      </ul>
     ),
   },
   {
-    title: "Employee Management System",
+    title: "FitFusion AI — Autonomous Health",
+    subtitle: "AI Workout Generation & Recovery Analytics",
     description:
-      "Secure RBAC-based system for employee & payroll management.",
-    image: emptrack,
+      "Full-stack AI fitness application for workout generation, nutrition planning, and recovery analysis.",
+    tagInline: "React · Node.js · Express · Prisma · PostgreSQL · Gemini API",
+    image: fitfusion,
     techStack: [
       "React",
       "Node.js",
       "Express",
-      "Prisma",
       "PostgreSQL",
-      "shadcn/ui",
+      "Prisma",
+      "Gemini API",
+      "Recharts",
       "Tailwind",
     ],
     links: [
-      { label: "Backend", url: "https://github.com/ShivVk18/empTrack-backend" },
-      { label: "Frontend", url: "https://github.com/ShivVk18/EmpTrack-frontend" },
+      { label: "Backend GitHub", url: "https://github.com/ShivVk18/FitFusion-backend" },
+      { label: "Frontend GitHub", url: "https://github.com/ShivVk18/FitFusion-frontend" },
     ],
     content: (
-      <>
-        <p>
-          Developed a scalable employee management system with RBAC and
-          company-level data isolation.
-        </p>
-        <p>
-          Implemented payroll and lifecycle management features.
-        </p>
-      </>
+      <ul className="list-disc pl-5 space-y-3">
+        <li>
+          Built a full-stack AI fitness application using React, Node.js, PostgreSQL, Prisma, and Google Gemini API, enabling personalized workout generation, nutrition planning, and AI-powered recovery analysis.
+        </li>
+        <li>
+          Integrated conversational AI, Recharts-based analytics, and schema-validated AI outputs to deliver accurate, interactive, and personalized fitness recommendations.
+        </li>
+      </ul>
     ),
   },
   {
     title: "SplitMates — AI Bill Splitting",
+    subtitle: "Real-Time Expense Sharing & Debt Settlement",
     description:
-      "Real-time expense splitting & budgeting app with analytics.",
+      "Full-stack AI expense-sharing platform with real-time bill splitting and financial insights.",
+    tagInline: "React · Node.js · Express · WebSockets · JWT · Gemini API",
     image: splitmates,
     techStack: [
       "React",
@@ -288,20 +348,21 @@ const projects: Project[] = [
       "WebSockets",
       "JWT",
       "Gemini API",
+      "Tailwind",
     ],
     links: [
-      { label: "Backend", url: "https://github.com/ShivVk18/split-mates-backend" },
-      { label: "Frontend", url: "https://github.com/ShivVk18/split-mates-backend" },
+      { label: "Backend GitHub", url: "https://github.com/ShivVk18/split-mates-backend" },
+      { label: "Frontend GitHub", url: "https://github.com/ShivVk18/split-mates-backend" },
     ],
     content: (
-      <>
-        <p>
-          Built a full-stack app for expense splitting with real-time sync.
-        </p>
-        <p>
-          Designed secure JWT-based authentication and analytics dashboards.
-        </p>
-      </>
+      <ul className="list-disc pl-5 space-y-3">
+        <li>
+          Developed SplitMates, a full-stack AI-powered expense-sharing platform using React, Node.js, Express, Prisma, PostgreSQL, WebSockets, and Google Gemini API, enabling real-time bill splitting, intelligent financial assistance, and AI-driven expense management.
+        </li>
+        <li>
+          Integrated AI-powered financial insights, optimal debt settlement recommendations, personalized monthly spending reports, and context-aware payment reminders by leveraging LLM integration, graph-based optimization, scheduled automation, and real-time user data.
+        </li>
+      </ul>
     ),
   },
 ];

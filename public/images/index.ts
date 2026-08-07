@@ -13,6 +13,7 @@ import splitmates from './Splitmates.png'
 import emptrack from './emptrack.png'
 import ascendai from './AscendAi.png'
 import fastapi from './FastAPI (1).png'
+import fitfusion from './FitFusion.png'
 export {
     profilePic,
     express,
@@ -28,5 +29,6 @@ export {
     splitmates,
     ascendai,
     emptrack,
-    fastapi
+    fastapi,
+    fitfusion
 }

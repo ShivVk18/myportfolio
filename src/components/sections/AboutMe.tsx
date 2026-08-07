@@ -1,147 +1,153 @@
 "use client";
 
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { Linkedin } from "lucide-react";
-import { motion } from "framer-motion";
+import { Linkedin, Terminal, ArrowUpRight, Code2, CheckCircle } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 import { profilePic } from "../../../public/images";
-import { TextGenerateEffect } from "../ui/text-generate-effect";
+import { MagneticButton } from "../ui/MagneticButton";
+
+// Scroll Typewriter Tag Component
+const TypewriterTag = ({ text }: { text: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    if (!isInView) return;
+    let i = 0;
+    const timer = setInterval(() => {
+      if (i <= text.length) {
+        setDisplayedText(text.slice(0, i));
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, [isInView, text]);
+
+  return (
+    <div
+      ref={ref}
+      className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-primary/35 bg-primary/10 backdrop-blur-xl font-mono text-xs sm:text-sm text-foreground font-semibold max-w-full shadow-sm"
+    >
+      <Code2 className="w-4 h-4 text-primary shrink-0" />
+      <span className="break-all sm:break-normal">{displayedText}</span>
+      <span className="w-1.5 h-4 bg-primary animate-pulse shrink-0" />
+    </div>
+  );
+};
 
 const AboutMe = () => {
   return (
     <section
       id="about"
-      className="relative w-full min-h-screen py-20 overflow-hidden"
+      className="relative w-full min-h-screen py-24 overflow-hidden"
     >
-      <div className="container relative z-10 mx-auto px-4 md:px-10 lg:px-20 max-w-6xl">
+      <div className="container relative z-10 mx-auto px-4 sm:px-8 md:pl-28 lg:pl-32 lg:pr-16 max-w-7xl">
         
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-col items-center"
-        >
-          <span className="text-xs font-bold tracking-widest text-primary uppercase mb-3">
-            01. Introduction
-          </span>
-          <h1 className="text-center text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-4">
-            About Me
-          </h1>
-          <div className="h-1 w-20 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full" />
-        </motion.div>
+        {/* Asymmetric Section Header */}
+        <div className="flex flex-col items-start mb-16 relative">
+          <div className="flex items-center gap-2 font-mono text-xs text-primary uppercase tracking-widest mb-3">
+            <Terminal className="w-3.5 h-3.5" />
+            <span>{"// 01. ABOUT_ME.ts"}</span>
+          </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-16 mt-16 md:mt-24">
-
-          {/* Text Section */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
+          <motion.h2
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="md:w-1/2 space-y-8 order-2 md:order-1"
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="font-heading text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-muted-foreground uppercase"
           >
-            {/* Identity Badge */}
-            <div className="relative inline-block">
-              <div className="absolute inset-0 bg-primary/20 rounded-xl blur-xl" />
-              <div className="relative text-sm sm:text-base font-semibold py-3 px-5 rounded-lg border border-primary/20 bg-background/50 backdrop-blur-xl">
-                <TextGenerateEffect
-                  words="Full-Stack Web Developer · UI-Focused · Problem Solver"
-                  className="text-foreground tracking-wide font-mono text-sm"
-                />
-              </div>
+            Personal <span className="text-primary">Statement</span>
+          </motion.h2>
+
+          <div className="h-1 w-28 bg-gradient-to-r from-primary via-cyan-400 to-transparent rounded-full mt-4" />
+        </div>
+
+        {/* 2-Column Asymmetric Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+          {/* Left Column: Personal Statement Narrative */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="lg:col-span-7 space-y-6"
+          >
+            {/* Typewriter Tagline */}
+            <TypewriterTag text="Full-Stack Web Developer · UI-Focused · Problem Solver" />
+
+            {/* Paragraph Rhythm: Punchy Bold Opening Line */}
+            <div className="space-y-4 pt-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground leading-snug font-heading">
+                I build high-scale web products with clean code, modern architecture, and purposeful UI.
+              </h3>
+
+              <p className="text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
+                My approach bridges technical rigor with aesthetic precision — engineering fast React &amp; Next.js applications, robust PostgreSQL databases, and real-time AI integrations.
+              </p>
+
+              <p className="text-base text-muted-foreground/80 font-sans">
+                Currently, I am deep diving into native iOS development to expand cross-platform engineering capabilities while continuing to deliver full-stack web solutions.
+              </p>
             </div>
 
-            {/* Paragraphs */}
-            <div className="space-y-6">
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-base sm:text-lg leading-relaxed text-muted-foreground"
-              >
-                I am a full-stack web developer with a strong passion for building{" "}
-                <span className="text-foreground font-semibold">dynamic</span>,{" "}
-                <span className="text-foreground font-semibold">responsive</span>, and{" "}
-                <span className="text-foreground font-semibold">scalable</span> web applications that deliver meaningful user experiences.
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-base sm:text-lg leading-relaxed text-muted-foreground"
-              >
-                I enjoy solving real-world problems with{" "}
-                <span className="text-foreground font-semibold">clean architecture</span>,{" "}
-                efficient APIs, and thoughtful UI/UX while continuously learning and keeping up with the bleeding edge of web technologies.
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-                className="text-base sm:text-lg leading-relaxed text-muted-foreground"
-              >
-                Currently, I am deep diving into{" "}
-               
-                <span className="text-foreground font-semibold">iOS Development</span> to expand my technical horizons and build more robust, intelligent systems.
-              </motion.p>
+            {/* Social Connect Button */}
+            <div className="pt-4 flex items-center gap-4">
+              <MagneticButton href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                <div className="inline-flex items-center gap-2.5 px-6 py-3.5 border border-primary/30 bg-card/80 text-foreground rounded-xl font-medium hover:border-primary transition-all backdrop-blur-xl shadow-lg text-sm group">
+                  <Linkedin className="w-4 h-4 text-primary" />
+                  <span>Connect on LinkedIn</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+              </MagneticButton>
             </div>
-
-            {/* Social */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="pt-6"
-            >
-              <motion.a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05, border: "1px solid var(--color-primary)" }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-3 px-6 py-3 border border-border bg-card/50 text-foreground rounded-full font-medium hover:bg-card/80 transition-all backdrop-blur-xl shadow-lg"
-              >
-                <Linkedin className="w-5 h-5 text-primary" />
-                <span className="text-sm">Connect on LinkedIn</span>
-              </motion.a>
-            </motion.div>
           </motion.div>
 
-          {/* Image Section */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="md:w-1/2 flex justify-center order-1 md:order-2 perspective-[1000px]"
-          >
-            <div className="relative group p-4">
-              {/* Glassmorphic Frame Backdrop */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-background/50 rounded-full blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-60" />
-              <div className="absolute inset-2 rounded-full border border-primary/20 border-t-primary/50 rotate-45 group-hover:rotate-[225deg] transition-all duration-1000 ease-in-out" />
-              
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-2 border-border/50 bg-card p-2 shadow-2xl group-hover:border-primary/50 transition-colors duration-500">
-                <div className="w-full h-full rounded-full overflow-hidden relative">
+          {/* Right Column: Iris/Wipe Mask Animated Photo with Duotone Dark Rim Glow */}
+          <div className="lg:col-span-5 flex justify-center perspective-[1000px]">
+            <motion.div
+              initial={{ clipPath: "circle(0% at 50% 50%)" }}
+              whileInView={{ clipPath: "circle(75% at 50% 50%)" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="relative group p-3 w-full max-w-md"
+            >
+              {/* Soft Orange Rim Light Glow Container */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-primary/40 via-amber-500/20 to-transparent blur-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Duotone Dark Profile Frame */}
+              <div className="relative rounded-3xl border border-primary/40 bg-card/90 p-4 backdrop-blur-2xl shadow-2xl space-y-3">
+                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-neutral-950 border border-primary/30">
                   <Image
                     src={profilePic}
-                    alt="Profile Picture"
+                    alt="Shivansh Saxena"
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale contrast-125 brightness-90 mix-blend-luminosity"
                     priority
                   />
-                  {/* Subtle overlay for blending */}
-                  <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
+                  {/* Duotone Tint Overlay (Black + Orange Rim Light Glow) */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-black via-primary/10 to-primary/25 mix-blend-overlay pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
+
+                  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-xs font-mono">
+                    <div>
+                      <div className="text-foreground font-bold text-base">Shivansh Saxena</div>
+                      <div className="text-primary font-semibold">Full-Stack Engineer</div>
+                    </div>
+                    <div className="px-2 py-1 rounded bg-card/90 border border-primary/30 text-[10px] text-emerald-400 flex items-center gap-1">
+                      <CheckCircle className="w-3 h-3" /> VERIFIED
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
         </div>
       </div>
