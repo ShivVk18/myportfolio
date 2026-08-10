@@ -18,6 +18,10 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Shivansh Saxena | Portfolio",
   description: "Full Stack Developer Portfolio showcasing modern, performant web applications.",
+  icons: {
+    icon: { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
