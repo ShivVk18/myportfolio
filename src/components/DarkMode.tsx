@@ -49,8 +49,7 @@ export function ModeToggle() {
         }
       `;
 
-      // @ts-expect-error — startViewTransition is not yet in TS DOM lib
-      document.startViewTransition(() => setTheme(next));
+      (document as Document & { startViewTransition: (cb: () => void) => void }).startViewTransition(() => setTheme(next));
     } else {
       setTheme(next);
     }
