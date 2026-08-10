@@ -104,12 +104,12 @@ export default function Projects() {
                   </button>
                 </div>
 
-                <div className="relative w-full aspect-video border-b border-border/30 overflow-hidden">
+                <div className="relative w-full aspect-video border-b border-border/30 overflow-hidden bg-black/60">
                   <Image
                     src={active.image}
                     alt={active.title}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     priority
                   />
                 </div>
@@ -287,6 +287,7 @@ const projects: Project[] = [
       "Tailwind",
     ],
     links: [
+      { label: "Live Demo", url: "https://ascendai-two.vercel.app/" },
       { label: "GitHub", url: "https://github.com/ShivVk18/ai-career-buddy" },
     ],
     content: (
@@ -318,6 +319,7 @@ const projects: Project[] = [
       "Tailwind",
     ],
     links: [
+      { label: "Live Demo", url: "https://fitfusio.netlify.app/" },
       { label: "Backend GitHub", url: "https://github.com/ShivVk18/FitFusion-backend" },
       { label: "Frontend GitHub", url: "https://github.com/ShivVk18/FitFusion-frontend" },
     ],

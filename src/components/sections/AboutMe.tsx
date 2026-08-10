@@ -119,21 +119,21 @@ const AboutMe = () => {
               className="relative group p-3 w-full max-w-md"
             >
               {/* Soft Orange Rim Light Glow Container */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-primary/40 via-amber-500/20 to-transparent blur-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-primary/30 via-amber-500/15 to-transparent blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
 
-              {/* Duotone Dark Profile Frame */}
-              <div className="relative rounded-3xl border border-primary/40 bg-card/90 p-4 backdrop-blur-2xl shadow-2xl space-y-3">
-                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-neutral-950 border border-primary/30">
+              {/* Profile Frame — light/dark aware */}
+              <div className="relative rounded-3xl border border-primary/30 dark:border-primary/40 bg-card/80 dark:bg-card/90 p-4 backdrop-blur-2xl shadow-2xl space-y-3">
+                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-950 border border-primary/20 dark:border-primary/30">
                   <Image
                     src={profilePic}
                     alt="Shivansh Saxena"
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale contrast-125 brightness-90 mix-blend-luminosity"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 dark:filter dark:grayscale dark:contrast-125 dark:brightness-90"
                     priority
                   />
-                  {/* Duotone Tint Overlay (Black + Orange Rim Light Glow) */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-black via-primary/10 to-primary/25 mix-blend-overlay pointer-events-none" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
+                  {/* Dark-mode duotone overlay */}
+                  <div className="absolute inset-0 hidden dark:block bg-gradient-to-tr from-black via-primary/10 to-primary/25 mix-blend-overlay pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 dark:from-background via-transparent to-transparent opacity-70 dark:opacity-90" />
 
                   <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-xs font-mono">
                     <div>
