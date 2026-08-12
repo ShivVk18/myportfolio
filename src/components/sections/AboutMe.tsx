@@ -140,9 +140,7 @@ const AboutMe = () => {
                       <div className="text-foreground font-bold text-base">Shivansh Saxena</div>
                       <div className="text-primary font-semibold">Full-Stack Engineer</div>
                     </div>
-                    <div className="px-2 py-1 rounded bg-card/90 border border-primary/30 text-[10px] text-emerald-400 flex items-center gap-1">
-                      <CheckCircle className="w-3 h-3" /> VERIFIED
-                    </div>
+                   
                   </div>
                 </div>
               </div>
