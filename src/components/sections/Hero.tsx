@@ -110,7 +110,7 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             className="text-muted-foreground/80 text-sm sm:text-base max-w-xl leading-relaxed font-sans font-normal pt-2"
           >
-            Full-stack software engineer building web &amp; mobile applications with React, Next.js, Node.js, and Google Gemini API. Passionate about clean architecture, system performance, and responsive UI design.
+            Full-stack software engineer building web &amp; mobile applications with React, Next.js, Node.js, and FastAPI. Passionate about clean architecture, system performance, and responsive UI design.
           </motion.p>
 
           {/* Buttons Block */}
