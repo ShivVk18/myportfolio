@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { apnaDhaba, fitfusion, splitmates, ascendai, emptrack } from "../../../public/images";
+import {  fitfusion, splitmates, ascendai } from "../../../public/images";
 import { ArrowUpRight, X, Sparkles, FileText } from "lucide-react";
 
 /* ---------------- TYPES ---------------- */
@@ -28,7 +28,7 @@ const projectsData: Project[] = [
   
   {
     id: "fitfusion",
-    number: "02",
+    number: "01",
     title: "FITFUSION AI",
     category: "AI PRODUCTIVITY",
     description: "Adaptive AI workout regimens and personalized nutrition planning powered by Gemini API.",
@@ -47,7 +47,7 @@ const projectsData: Project[] = [
   },
   {
     id: "splitmates",
-    number: "03",
+    number: "02",
     title: "SPLITMATES",
     category: "FINTECH & REAL-TIME",
     description: "Real-time shared expense tracking with optimal group debt settlement algorithms.",
@@ -65,7 +65,7 @@ const projectsData: Project[] = [
   },
   {
     id: "ascendai",
-    number: "04",
+    number: "03",
     title: "ASCENDAI",
     category: "CAREER INTELLIGENCE",
     description: "AI career roadmap generator and interactive mock technical interview simulator.",
@@ -82,24 +82,7 @@ const projectsData: Project[] = [
       "Architected with Next.js App Router, Clerk authentication, PostgreSQL, and Prisma for fast, reliable data persistence.",
     ],
   },
-  {
-    id: "emptrack",
-    number: "05",
-    title: "EMPTRACK",
-    category: "SYSTEMS & RBAC",
-    description: "Scalable RBAC employee lifecycle management with multi-tenant company data isolation.",
-    problemSolved: "Streamlines internal corporate workforce operations by enforcing role-based permissions, automated payroll workflows, and secure employee lifecycle auditing.",
-    image: emptrack,
-    techStack: ["React", "Node.js", "Express", "Prisma", "PostgreSQL"],
-    links: [
-      { label: "GitHub ↗", url: "https://github.com/ShivVk18/empTrack-backend" },
-    ],
-    details: [
-      "Engineered secure role-based access control (RBAC) separating administrative, managerial, and staff privileges.",
-      "Implemented automated payroll calculation and lifecycle event auditing with relational PostgreSQL schema design.",
-      "Designed responsive administration views with fast filtering, search indexing, and real-time status updates.",
-    ],
-  },
+ 
 ];
 
 /* ---------------- COMPONENT ---------------- */
@@ -181,7 +164,7 @@ export default function Projects() {
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover object-top transition-transform duration-300 group-hover/img:scale-105"
+                        className="object-fill transition-transform duration-300 group-hover/img:scale-105"
                       />
                       <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
                         <span className="bg-[#141414] text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-[2px] border border-white/20 shadow-md">
@@ -293,7 +276,7 @@ export default function Projects() {
                       src={active.image}
                       alt={active.title}
                       fill
-                      className="object-cover object-top"
+                      className="object-fill object-top"
                     />
                   </div>
 

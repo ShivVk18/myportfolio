@@ -10,7 +10,7 @@ import node from './node.png'
 import react from './react.png'
 import tailwind from './tailwind.png'
 import splitmates from './Splitmates.png'
-import emptrack from './emptrack.png'
+
 import ascendai from './AscendAi.png'
 import fastapi from './FastAPI (1).png'
 import fitfusion from './FitFusion.png'
@@ -32,7 +32,7 @@ export {
     tailwind,
     splitmates,
     ascendai,
-    emptrack,
+   
     fastapi,
     fitfusion,
     

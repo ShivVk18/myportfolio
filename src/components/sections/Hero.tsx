@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FileText, ArrowDown, Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
+import {  ArrowDown, Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
 
 export const Hero = () => {
   const [timeStr, setTimeStr] = useState<string>("");
