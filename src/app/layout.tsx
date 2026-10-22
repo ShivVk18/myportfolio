@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Outfit } from "next/font/google";
+import { Space_Grotesk, Outfit, Space_Mono } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import { Toaster } from "sonner";
@@ -15,9 +15,15 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
+const spaceMono = Space_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Shivansh Saxena | Portfolio",
-  description: "Full Stack Developer Portfolio showcasing modern, performant web applications.",
+  title: "Shivansh Saxena — Full-Stack Developer",
+  description: "Full-Stack Engineer & Product Builder. Minimal editorial portfolio with clean architecture, thoughtful UX, and real-world impact.",
   icons: {
     icon: { url: "/icon.png", type: "image/png", sizes: "512x512" },
     apple: "/icon.png",
@@ -32,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${spaceGrotesk.variable} ${outfit.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${outfit.variable} ${spaceMono.variable} antialiased selection:bg-[#FF5A1F] selection:text-white`}
       >
         <ThemeProvider
           attribute="class"

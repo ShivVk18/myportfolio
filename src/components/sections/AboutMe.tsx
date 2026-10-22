@@ -1,153 +1,117 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { Linkedin, Terminal, ArrowUpRight, Code2, CheckCircle } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { profilePic } from "../../../public/images";
-import { MagneticButton } from "../ui/MagneticButton";
+import { ArrowUpRight, MapPin, Code2, Layers } from "lucide-react";
+import { pixelAvatar } from "../../../public/images";
 
-// Scroll Typewriter Tag Component
-const TypewriterTag = ({ text }: { text: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [displayedText, setDisplayedText] = useState("");
-
-  useEffect(() => {
-    if (!isInView) return;
-    let i = 0;
-    const timer = setInterval(() => {
-      if (i <= text.length) {
-        setDisplayedText(text.slice(0, i));
-        i++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 30);
-
-    return () => clearInterval(timer);
-  }, [isInView, text]);
+export const AboutMe = () => {
 
   return (
-    <div
-      ref={ref}
-      className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-primary/35 bg-primary/10 backdrop-blur-xl font-mono text-xs sm:text-sm text-foreground font-semibold max-w-full shadow-sm"
-    >
-      <Code2 className="w-4 h-4 text-primary shrink-0" />
-      <span className="break-all sm:break-normal">{displayedText}</span>
-      <span className="w-1.5 h-4 bg-primary animate-pulse shrink-0" />
-    </div>
-  );
-};
-
-const AboutMe = () => {
-  return (
-    <section
-      id="about"
-      className="relative w-full min-h-screen py-24 overflow-hidden"
-    >
-      <div className="container relative z-10 mx-auto px-4 sm:px-8 md:pl-28 lg:pl-32 lg:pr-16 max-w-7xl">
+    <section id="about" className="relative w-full py-16 md:py-24 border-b-2 border-[#141414] dark:border-[#3A3832]">
+      <div className="max-w-[1140px] w-[90%] sm:w-[88%] mx-auto">
         
-        {/* Asymmetric Section Header */}
-        <div className="flex flex-col items-start mb-16 relative">
-          <div className="flex items-center gap-2 font-mono text-xs text-primary uppercase tracking-widest mb-3">
-            <Terminal className="w-3.5 h-3.5" />
-            <span>{"// 01. ABOUT_ME.ts"}</span>
-          </div>
-
-          <motion.h2
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="font-heading text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-muted-foreground uppercase"
-          >
-            Personal <span className="text-primary">Statement</span>
-          </motion.h2>
-
-          <div className="h-1 w-28 bg-gradient-to-r from-primary via-cyan-400 to-transparent rounded-full mt-4" />
+        {/* Section Heading */}
+        <div className="mb-10 sm:mb-12">
+          <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#141414] dark:text-[#F5F4EE] uppercase">
+            ABOUT ME.
+          </h2>
+          <div className="h-1 w-16 bg-primary mt-2.5" />
         </div>
 
-        {/* 2-Column Asymmetric Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        {/* Minimal 2-Column Overview: Bio + Compact Facts */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+          
+          {/* Left Column: Short Paragraph + Compact Facts */}
+          <div className="md:col-span-8 space-y-6">
+            <p className="text-lg sm:text-xl text-[#333333] dark:text-[#B5B3A8] leading-relaxed font-sans">
+              Full-stack developer based in Bhopal, India, focused on building end-to-end web products, mobile applications, and AI integrations. I enjoy turning complex, manual workflows into fast, reliable software with clean architecture and high visual polish.
+            </p>
 
-          {/* Left Column: Personal Statement Narrative */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="lg:col-span-7 space-y-6"
-          >
-            {/* Typewriter Tagline */}
-            <TypewriterTag text="Full-Stack Web Developer · UI-Focused · Problem Solver" />
-
-            {/* Paragraph Rhythm: Punchy Bold Opening Line */}
-            <div className="space-y-4 pt-2">
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground leading-snug font-heading">
-                I build high-scale web products with clean code, modern architecture, and purposeful UI.
-              </h3>
-
-              <p className="text-base sm:text-lg leading-relaxed text-muted-foreground font-sans">
-                My approach bridges technical rigor with aesthetic precision — engineering fast React &amp; Next.js applications, robust PostgreSQL databases, and real-time AI integrations.
-              </p>
-
-              <p className="text-base text-muted-foreground/80 font-sans">
-                Currently, I am deep diving into native iOS development to expand cross-platform engineering capabilities while continuing to deliver full-stack web solutions.
-              </p>
-            </div>
-
-            {/* Social Connect Button */}
-            <div className="pt-4 flex items-center gap-4">
-              <MagneticButton href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-                <div className="inline-flex items-center gap-2.5 px-6 py-3.5 border border-primary/30 bg-card/80 text-foreground rounded-xl font-medium hover:border-primary transition-all backdrop-blur-xl shadow-lg text-sm group">
-                  <Linkedin className="w-4 h-4 text-primary" />
-                  <span>Connect on LinkedIn</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            {/* Compact Facts Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              {/* Fact 1: Location */}
+              <div className="p-3.5 rounded-sm border border-[#141414]/20 dark:border-white/15 bg-white dark:bg-[#1A1A18] space-y-1 paper-shadow-sm">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] text-primary font-bold">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>LOCATION</span>
                 </div>
-              </MagneticButton>
-            </div>
-          </motion.div>
-
-          {/* Right Column: Iris/Wipe Mask Animated Photo with Duotone Dark Rim Glow */}
-          <div className="lg:col-span-5 flex justify-center perspective-[1000px]">
-            <motion.div
-              initial={{ clipPath: "circle(0% at 50% 50%)" }}
-              whileInView={{ clipPath: "circle(75% at 50% 50%)" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative group p-3 w-full max-w-md"
-            >
-              {/* Soft Orange Rim Light Glow Container */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-primary/30 via-amber-500/15 to-transparent blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
-
-              {/* Profile Frame — light/dark aware */}
-              <div className="relative rounded-3xl border border-primary/30 dark:border-primary/40 bg-card/80 dark:bg-card/90 p-4 backdrop-blur-2xl shadow-2xl space-y-3">
-                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-950 border border-primary/20 dark:border-primary/30">
-                  <Image
-                    src={profilePic}
-                    alt="Shivansh Saxena"
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105 dark:filter dark:grayscale dark:contrast-125 dark:brightness-90"
-                    priority
-                  />
-                  {/* Dark-mode duotone overlay */}
-                  <div className="absolute inset-0 hidden dark:block bg-gradient-to-tr from-black via-primary/10 to-primary/25 mix-blend-overlay pointer-events-none" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 dark:from-background via-transparent to-transparent opacity-70 dark:opacity-90" />
-
-                  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-xs font-mono">
-                    <div>
-                      <div className="text-foreground font-bold text-base">Shivansh Saxena</div>
-                      <div className="text-primary font-semibold">Full-Stack Engineer</div>
-                    </div>
-                   
-                  </div>
-                </div>
+                <p className="font-sans text-sm font-bold text-[#141414] dark:text-[#F5F4EE]">
+                  Bhopal, India
+                </p>
               </div>
-            </motion.div>
+
+              {/* Fact 2: Focus */}
+              <div className="p-3.5 rounded-sm border border-[#141414]/20 dark:border-white/15 bg-white dark:bg-[#1A1A18] space-y-1 paper-shadow-sm">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] text-primary font-bold">
+                  <Code2 className="w-3.5 h-3.5" />
+                  <span>DISCIPLINE</span>
+                </div>
+                <p className="font-sans text-sm font-bold text-[#141414] dark:text-[#F5F4EE]">
+                  Full-Stack Developer
+                </p>
+              </div>
+
+              {/* Fact 3: Domains */}
+              <div className="p-3.5 rounded-sm border border-[#141414]/20 dark:border-white/15 bg-white dark:bg-[#1A1A18] space-y-1 paper-shadow-sm">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] text-primary font-bold">
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>SPECIALTIES</span>
+                </div>
+                <p className="font-sans text-sm font-bold text-[#141414] dark:text-[#F5F4EE]">
+                  Web · Mobile · AI
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Action Link */}
+            <div className="pt-2 flex items-center gap-4">
+              <a
+                href="#projects"
+                className="px-4 py-2 rounded-sm bg-[#141414] dark:bg-[#F5F4EE] text-white dark:text-[#141414] font-mono text-xs font-bold tactile-btn flex items-center gap-1.5"
+              >
+                <span>VIEW SELECTED WORK</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-primary" />
+              </a>
+
+              <a
+                href="mailto:shivansh.dev2708@gmail.com"
+                className="font-mono text-xs text-[#555555] dark:text-[#9C9A92] hover:text-primary transition-colors underline underline-offset-4"
+              >
+                Get in touch →
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Compact Photo Card */}
+          <div className="md:col-span-4 flex justify-center md:justify-end">
+            <div className="w-48 sm:w-56 rounded-sm border-2 border-[#141414] dark:border-[#3A3832] bg-white dark:bg-[#1A1A18] p-3 space-y-2.5 paper-shadow">
+              <div className="flex items-center justify-between font-mono text-[10px] text-muted-foreground border-b border-[#141414]/15 dark:border-white/10 pb-1.5">
+                <span className="font-bold text-[#141414] dark:text-[#F5F4EE]">
+                  AVATAR.PNG
+                </span>
+                <span className="px-1.5 py-0.5 rounded-[2px] border border-[#141414]/20 dark:border-white/20 text-[9px] font-mono font-bold text-primary bg-[#F0EDE6] dark:bg-[#252422]">
+                  PIXEL
+                </span>
+              </div>
+
+              <div className="relative aspect-square w-full rounded-[2px] overflow-hidden bg-[#FAF8F5] dark:bg-[#121211] border border-[#141414]/20 dark:border-white/10">
+                <Image
+                  src={pixelAvatar}
+                  alt="Shivansh Saxena (Pixel Avatar)"
+                  fill
+                  className="object-cover pixel-art"
+                  priority
+                />
+              </div>
+
+              <div className="text-center font-mono text-[10px] text-[#555555] dark:text-[#9C9A92] uppercase font-semibold">
+                SHIVANSH · DEV_ID #01
+              </div>
+            </div>
           </div>
 
         </div>
+
       </div>
     </section>
   );

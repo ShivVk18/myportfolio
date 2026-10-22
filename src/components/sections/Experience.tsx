@@ -1,196 +1,135 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Briefcase, Terminal, Calendar, MapPin } from "lucide-react";
+import { Calendar, Building2, MapPin } from "lucide-react";
+
+interface ExperienceItem {
+  id: string;
+  number: string;
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  technologies: string[];
+  bullets: string[];
+}
+
+const experiences: ExperienceItem[] = [
+  {
+    id: "mpsedc",
+    number: "01",
+    role: "GRADUATE ENGINEER TRAINEE",
+    company: "MPSEDC",
+    location: "Bhopal, India",
+    period: "NOV 2025 — PRESENT",
+    technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "Enterprise Systems"],
+    bullets: [
+      "Engineered 4 production citizen-service web modules across frontend and backend for an enterprise state housing portal.",
+      "Designed reusable UI form components and client validation libraries, accelerating sprint feature delivery by ~30%.",
+      "Optimized client render cycles and state transitions, eliminating UI frame drops across low-spec government kiosks.",
+    ],
+  },
+  {
+    id: "mindin",
+    number: "02",
+    role: "SOFTWARE ENGINEER INTERN",
+    company: "MindIn",
+    location: "Remote",
+    period: "AUG 2025 — NOV 2025",
+    technologies: ["React Native", "Google Gemini API", "TypeScript", "FastAPI"],
+    bullets: [
+      "Developed core React Native MVP screens and real-time check-in streak notification routines from ground zero.",
+      "Integrated Google Gemini API workflows with strict schema validation and fallback handling for personalized health insights.",
+      "Improved frontend bundle delivery and client render performance by ~25% across cross-platform mobile flows.",
+    ],
+  },
+];
 
 export const Experience = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 75%", "end 50%"],
-  });
-
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  const experiences = [
-    {
-      title: "Software Engineer Intern",
-      company: "MindIn",
-      location: "Remote",
-      period: "Aug 2025 – Nov 2025",
-      type: "Internship",
-      tech: ["React Native", "Node.js", "WebSockets", "Gemini API", "NativeWind"],
-      bullets: [
-        "Collaborated closely with founders and product teams to build the MVP for a mental health startup.",
-        "Took end-to-end ownership of features in an agile environment.",
-      ],
-    },
-    {
-      title: "Graduate Engineer Trainee",
-      company: "MPSEDC",
-      location: "On-Site",
-      period: "Nov 2025 – Present",
-      type: "Full-Time",
-      tech: ["React.js", "Bootstrap", "ERP Systems", "JavaScript"],
-      bullets: [
-        "Designed and implemented responsive frontend pages for a Housing ERP system.",
-        "Gained hands-on experience with sprint-based delivery and large-scale CMS architecture.",
-      ],
-    },
-  ];
-
   return (
-    <section
-      id="experience"
-      ref={containerRef}
-      className="relative w-full min-h-screen py-24 overflow-hidden px-4 sm:px-8 md:pl-28 lg:pl-32 lg:pr-16"
-    >
-      <div className="max-w-7xl mx-auto">
+    <section id="experience" className="relative w-full py-16 md:py-24 border-b-2 border-[#141414] dark:border-[#3A3832]">
+      <div className="max-w-[1140px] w-[90%] sm:w-[88%] mx-auto">
         
-        {/* Asymmetric Section Header */}
-        <div className="flex flex-col items-start mb-16 relative">
-          <div className="flex items-center gap-2 font-mono text-xs text-primary uppercase tracking-widest mb-3">
-            <Terminal className="w-3.5 h-3.5" />
-            <span>{"// 04. EXPERIENCE_TIMELINE.ts"}</span>
-          </div>
-
-          <motion.h2
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="font-heading text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-muted-foreground uppercase"
-          >
-            Career <span className="text-primary">Timeline</span>
-          </motion.h2>
-
-          <div className="h-1 w-28 bg-gradient-to-r from-primary via-rose-400 to-transparent rounded-full mt-4" />
+        {/* Section Header */}
+        <div className="mb-10 sm:mb-14">
+          <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#141414] dark:text-[#F5F4EE] uppercase">
+            WHERE I&apos;VE CONTRIBUTED.
+          </h2>
+          <div className="h-1 w-16 bg-primary mt-2.5" />
         </div>
 
-        {/* Timeline Area with Scroll Line & Snap Nodes */}
-        <div className="relative max-w-4xl mx-auto py-6">
-
-          {/* Background Static Line */}
-          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-border/40 -translate-x-1/2" />
-
-          {/* Animated Scroll-Driven Foreground Line */}
-          <motion.div
-            style={{ height: lineHeight }}
-            className="absolute left-4 sm:left-1/2 top-0 w-0.5 bg-gradient-to-b from-primary via-amber-400 to-primary -translate-x-1/2 shadow-[0_0_15px_var(--color-primary)]"
-          />
-
-          <div className="space-y-16">
-            {experiences.map((exp, idx) => {
-              const isEven = idx % 2 === 0;
-
-              return (
-                <div
-                  key={exp.title + exp.company}
-                  className={`relative flex flex-col sm:flex-row items-start ${
-                    isEven ? "sm:flex-row-reverse" : ""
-                  }`}
-                >
-                  {/* Timeline Dot Snap Node (Spring Overshoot) */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 350, damping: 18 }}
-                    className="absolute left-4 sm:left-1/2 top-6 -translate-x-1/2 z-20 w-9 h-9 rounded-full border-2 border-primary bg-background flex items-center justify-center shadow-[0_0_20px_var(--color-primary)]"
-                  >
-                    <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
-                  </motion.div>
-
-                  {/* Connecting Line from Dot to Card */}
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "24px" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.3 }}
-                    className={`hidden sm:block absolute top-10 h-0.5 bg-primary/60 z-10 ${
-                      isEven ? "right-1/2 translate-x-0" : "left-1/2 translate-x-0"
-                    }`}
-                  />
-
-                  {/* Side-Specific Sliding Card (Left slides from left -60px, Right slides from right 60px) */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? 60 : -60 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    className={`w-full sm:w-[calc(50%-40px)] pl-12 sm:pl-0 ${
-                      isEven ? "sm:pr-8" : "sm:pl-8"
-                    }`}
-                  >
-                    <div className="p-6 sm:p-8 rounded-3xl bg-card/75 border border-border/80 hover:border-primary/60 backdrop-blur-xl shadow-xl space-y-4 group transition-all">
-                      
-                      {/* Prominent Date Pill & Type */}
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="px-3 py-1 text-xs font-mono font-bold rounded-lg bg-primary/15 border border-primary/30 text-primary flex items-center gap-1.5 shadow-sm">
-                          <Calendar className="w-3.5 h-3.5 text-primary" />
-                          <span>{exp.period}</span>
-                        </span>
-
-                        <span className="px-2.5 py-0.5 text-[10px] font-mono rounded-md bg-secondary border border-border/50 text-muted-foreground font-semibold">
-                          {exp.type}
-                        </span>
-                      </div>
-
-                      {/* Title & Company */}
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
-                          {exp.title}
-                        </h3>
-
-                        <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground mt-1">
-                          <Briefcase className="w-3.5 h-3.5 text-primary" />
-                          <span className="text-foreground font-semibold">{exp.company}</span>
-                          <span>·</span>
-                          <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                          <span>{exp.location}</span>
-                        </div>
-                      </div>
-
-                      {/* Staggered Tech Badges */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        className="pt-2 flex flex-wrap gap-1.5 border-t border-border/30"
-                      >
-                        {exp.tech.map((t, tIdx) => (
-                          <motion.span
-                            key={t}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: 0.45 + tIdx * 0.05 }}
-                            className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-secondary/80 border border-border/40 text-muted-foreground"
-                          >
-                            {t}
-                          </motion.span>
-                        ))}
-                      </motion.div>
-
-                      {/* Bullets */}
-                      <ul className="pt-2 space-y-2 text-xs sm:text-sm text-muted-foreground font-sans leading-relaxed">
-                        {exp.bullets.map((b, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <span className="text-primary font-bold text-base leading-none">›</span>
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </motion.div>
+        {/* Concise Centered Experience Cards */}
+        <div className="space-y-6 sm:space-y-8">
+          {experiences.map((exp) => (
+            <article
+              key={exp.id}
+              className="rounded-sm border-2 border-[#141414] dark:border-[#3A3832] bg-white dark:bg-[#181816] paper-shadow-lg hover:paper-shadow-xl transition-all duration-200 overflow-hidden"
+            >
+              {/* Browser / Record Header */}
+              <div className="flex items-center justify-between px-4 sm:px-5 py-2.5 bg-[#F0EDE6] dark:bg-[#1E1E1C] border-b-2 border-[#141414] dark:border-[#3A3832] font-mono text-xs select-none">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-[#141414]/30" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-[#141414]/30" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-[#141414]/30" />
+                  </div>
+                  <span className="text-[11px] font-bold text-[#141414] dark:text-[#F5F4EE] tracking-wider ml-1">
+                    {exp.number} {"//"} {exp.id.toUpperCase()}
+                  </span>
                 </div>
-              );
-            })}
-          </div>
 
+                <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold text-primary">
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>{exp.period}</span>
+                </div>
+              </div>
+
+              {/* Card Body */}
+              <div className="p-5 sm:p-7 space-y-5">
+                {/* Role + Organization Details */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#141414]/10 dark:border-white/10 pb-4">
+                  <div className="space-y-1">
+                    <h3 className="font-heading text-xl sm:text-2xl font-black text-[#141414] dark:text-[#F5F4EE] uppercase tracking-tight">
+                      {exp.role}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-[#555555] dark:text-[#9C9A92]">
+                      <span className="flex items-center gap-1 font-bold text-[#141414] dark:text-white">
+                        <Building2 className="w-3.5 h-3.5 text-primary" />
+                        {exp.company}
+                      </span>
+                      <span>·</span>
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-3.5 h-3.5 opacity-60" />
+                        {exp.location}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2-3 Concise Outcome Bullets */}
+                <ul className="space-y-2 font-sans text-sm sm:text-base text-[#333333] dark:text-[#B5B3A8] leading-relaxed">
+                  {exp.bullets.map((bullet, bIdx) => (
+                    <li key={bIdx} className="flex items-start gap-2.5">
+                      <span className="text-primary font-mono font-bold mt-1 shrink-0">▪</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Technologies Used */}
+                <div className="pt-2 flex flex-wrap gap-1.5 sm:gap-2 border-t border-[#141414]/10 dark:border-white/10">
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase self-center mr-1">STACK:</span>
+                  {exp.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-0.5 rounded-[2px] font-mono text-[11px] font-medium border border-[#141414]/20 dark:border-white/15 bg-[#FAF8F5] dark:bg-[#1E1E1C] text-[#222222] dark:text-[#E2E0D8]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
 
       </div>

@@ -17,6 +17,7 @@ import {
   Terminal,
   Command,
   ArrowRight,
+  Mail,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -81,11 +82,19 @@ export const CommandPalette = () => {
     },
     {
       id: "experience",
-      title: "Jump to Experience Timeline",
+      title: "Jump to Work Experience",
       category: "Navigation",
-      icon: <Briefcase className="w-4 h-4 text-rose-400" />,
+      icon: <Briefcase className="w-4 h-4 text-primary" />,
       action: () => handleNavigate("#experience"),
       shortcut: "G E",
+    },
+    {
+      id: "contact",
+      title: "Jump to Contact & Inbox",
+      category: "Navigation",
+      icon: <Mail className="w-4 h-4 text-primary" />,
+      action: () => handleNavigate("#contact"),
+      shortcut: "G C",
     },
     {
       id: "resume",
@@ -102,7 +111,7 @@ export const CommandPalette = () => {
       id: "theme",
       title: `Switch Theme (Current: ${theme === "dark" ? "Dark" : "Light"})`,
       category: "Actions",
-      icon: theme === "dark" ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />,
+      icon: theme === "dark" ? <Sun className="w-4 h-4 text-primary" /> : <Moon className="w-4 h-4 text-[#171717]" />,
       action: () => {
         setTheme(theme === "dark" ? "light" : "dark");
         setIsOpen(false);
@@ -123,10 +132,10 @@ export const CommandPalette = () => {
       id: "linkedin",
       title: "Connect on LinkedIn",
       category: "Socials",
-      icon: <Linkedin className="w-4 h-4 text-blue-400" />,
+      icon: <Linkedin className="w-4 h-4 text-primary" />,
       action: () => {
         setIsOpen(false);
-        window.open("https://www.linkedin.com/", "_blank");
+        window.open("https://www.linkedin.com/in/shivansh-saxena-0679ab22a/", "_blank");
       },
     },
   ];
@@ -173,13 +182,13 @@ export const CommandPalette = () => {
       {/* Floating Keyboard Shortcut Trigger */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-[4000] hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 border border-primary/30 backdrop-blur-xl text-xs font-mono shadow-2xl text-foreground hover:border-primary transition-all group"
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
+        className="fixed bottom-6 right-6 z-[4000] hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-md bg-[#FFFFFF] dark:bg-[#1C1C1A] border-2 border-[#1F1F1F] dark:border-[#3A3832] text-xs font-mono paper-shadow-sm text-foreground hover:border-primary transition-all group"
         data-cursor="pointer"
       >
         <Terminal className="w-3.5 h-3.5 text-primary group-hover:rotate-12 transition-transform" />
-        <span>Command Palette</span>
+        <span>Commands</span>
         <kbd className="px-1.5 py-0.5 rounded bg-muted border border-border text-[10px] text-muted-foreground font-semibold">
           ⌘K
         </kbd>
@@ -194,19 +203,19 @@ export const CommandPalette = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-background/80 backdrop-blur-md"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -20 }}
+              initial={{ opacity: 0, scale: 0.96, y: -15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -20 }}
+              exit={{ opacity: 0, scale: 0.96, y: -15 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               onKeyDown={handleKeyDownInModal}
-              className="relative w-full max-w-xl rounded-2xl bg-card/95 border border-primary/30 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-2xl overflow-hidden z-10 flex flex-col font-sans"
+              className="relative w-full max-w-xl rounded-lg bg-[#FFFFFF] dark:bg-[#1C1C1A] border-2 border-[#1F1F1F] dark:border-[#3A3832] paper-shadow-lg overflow-hidden z-10 flex flex-col font-sans"
             >
               {/* Header Bar */}
-              <div className="flex items-center px-4 py-3 border-b border-border/50 gap-3 bg-secondary/30">
+              <div className="flex items-center px-4 py-3 border-b-2 border-[#1F1F1F] dark:border-[#3A3832] gap-3 bg-[#F0EEE9] dark:bg-[#252422]">
                 <Search className="w-4 h-4 text-primary shrink-0" />
                 <input
                   type="text"

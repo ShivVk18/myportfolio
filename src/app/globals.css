@@ -8,35 +8,33 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-outfit);
   --font-heading: var(--font-space-grotesk);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
+  --font-mono: var(--font-mono);
+
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -44,87 +42,76 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.25rem;
 
-  /* 🌤️ Light mode – amber-50 background with vibrant sunset orange */
-  --background: oklch(0.985 0.025 85); /* amber-50 */
-  --foreground: oklch(0.15 0.01 45);
+  /* 🎨 Editorial Brutalist Theme: Warm ivory / cream background with crisp near-black borders */
+  --background: #FAF8F5;
+  --foreground: #141414;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 45);
+  --card: #FFFFFF;
+  --card-foreground: #141414;
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 45);
+  --popover: #FFFFFF;
+  --popover-foreground: #141414;
 
-  --primary: oklch(0.65 0.22 45); /* Vibrant Sunset Orange */
-  --primary-foreground: oklch(0.985 0.025 85);
+  /* Energetic Strategic Orange/Red Accent */
+  --primary: #FF4D00;
+  --primary-foreground: #FFFFFF;
 
-  --secondary: oklch(0.95 0.03 85); /* amber-100 */
-  --secondary-foreground: oklch(0.3 0.05 45);
+  --secondary: #F0EDE6;
+  --secondary-foreground: #141414;
 
-  --muted: oklch(0.95 0.03 85);
-  --muted-foreground: oklch(0.5 0.05 45);
+  --muted: #EBE7DF;
+  --muted-foreground: #4A4A4A;
 
-  --accent: oklch(0.95 0.03 85);
-  --accent-foreground: oklch(0.3 0.05 45);
+  --accent: #FF4D00;
+  --accent-foreground: #FFFFFF;
 
-  --border: oklch(0.9 0.04 85);
-  --input: oklch(0.9 0.04 85);
-  --ring: oklch(0.65 0.22 45);
+  --destructive: #E53935;
+  --destructive-foreground: #FFFFFF;
 
-  --sidebar: oklch(0.99 0 0);
-  --sidebar-foreground: oklch(0.1 0 0);
-  --sidebar-border: oklch(0.9 0 0);
-  --sidebar-ring: oklch(0.5 0 0);
+  --border: #141414;
+  --input: #141414;
+  --ring: #FF4D00;
+
+  /* Small Editorial Highlight Yellow */
+  --highlight-yellow: #FFE600;
 }
-
 
 .dark {
-  /* Ultra-premium dark warm slate with fiery vibrant orange accents */
-  --background: oklch(0.12 0.01 60); /* Deep warm espresso */
-  --foreground: oklch(0.98 0.005 60);
-  
-  --card: oklch(0.15 0.01 60);
-  --card-foreground: oklch(0.98 0.005 60);
-  
-  --popover: oklch(0.15 0.01 60);
-  --popover-foreground: oklch(0.98 0.005 60);
-  
-  /* Glowing vivid neon-mango / sunset orange */
-  --primary: oklch(0.7 0.22 45); 
-  --primary-foreground: oklch(0.12 0.01 60);
-  
-  --secondary: oklch(0.2 0.02 60);
-  --secondary-foreground: oklch(0.98 0.005 60);
-  
-  --muted: oklch(0.2 0.02 60);
-  --muted-foreground: oklch(0.7 0.04 60);
-  
-  --accent: oklch(0.25 0.04 60);
-  --accent-foreground: oklch(0.98 0.005 60);
-  
-  --destructive: oklch(0.6 0.1 25);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.7 0.22 45);
-  
-  --chart-1: oklch(0.5 0 0);
-  --chart-2: oklch(0.6 0 0);
-  --chart-3: oklch(0.7 0 0);
-  --chart-4: oklch(0.8 0 0);
-  --chart-5: oklch(0.9 0 0);
-  
-  --sidebar: oklch(0.18 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.85 0.01 60);
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.3 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.85 0.01 60);
+  /* Warm espresso slate in dark mode with crisp retro border definition */
+  --background: #121211;
+  --foreground: #F5F4EE;
+
+  --card: #1A1A18;
+  --card-foreground: #F5F4EE;
+
+  --popover: #1A1A18;
+  --popover-foreground: #F5F4EE;
+
+  --primary: #FF4D00;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #22221F;
+  --secondary-foreground: #E2E0D8;
+
+  --muted: #242421;
+  --muted-foreground: #9C9A92;
+
+  --accent: #FF4D00;
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #3A3832;
+  --input: #3A3832;
+  --ring: #FF4D00;
+
+  --highlight-yellow: #FFE600;
 }
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
@@ -133,32 +120,105 @@ html{
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
+    @apply bg-background text-foreground antialiased selection:bg-[#FF4D00] selection:text-white font-sans;
+    background-color: var(--background);
+    color: var(--foreground);
   }
-  
-  /* Custom sleek scrollbar */
+
+  /* Sleek, unobtrusive retro scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--background);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-muted);
-    border-radius: 10px;
+    background: #D5D1C6;
+    border-radius: 2px;
+    border: 2px solid var(--background);
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #33322E;
+    border: 2px solid var(--background);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-accent);
+    background: var(--primary);
   }
 }
 
-@theme inline {
-  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
- 
-  @keyframes scroll {
-    to {
-      transform: translate(calc(-50% - 0.5rem));
-    }
+/* Pixel art rendering helper */
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Tactile Brutalist / Editorial Paper Shadows */
+.paper-shadow {
+  box-shadow: 3px 3px 0px #141414;
+}
+.paper-shadow-sm {
+  box-shadow: 2px 2px 0px #141414;
+}
+.paper-shadow-lg {
+  box-shadow: 5px 5px 0px #141414;
+}
+.paper-shadow-xl {
+  box-shadow: 8px 8px 0px #141414;
+}
+
+.dark .paper-shadow {
+  box-shadow: 3px 3px 0px #000000;
+}
+.dark .paper-shadow-sm {
+  box-shadow: 2px 2px 0px #000000;
+}
+.dark .paper-shadow-lg {
+  box-shadow: 5px 5px 0px #000000;
+}
+.dark .paper-shadow-xl {
+  box-shadow: 8px 8px 0px #000000;
+}
+
+/* Tactile physical lift & press states */
+.tactile-btn {
+  box-shadow: 3px 3px 0px #141414;
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tactile-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #141414;
+}
+.tactile-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #141414;
+}
+.dark .tactile-btn {
+  box-shadow: 3px 3px 0px #000000;
+}
+.dark .tactile-btn:hover {
+  box-shadow: 5px 5px 0px #000000;
+}
+.dark .tactile-btn:active {
+  box-shadow: 1px 1px 0px #000000;
+}
+
+/* Fine retro grid pattern for paper canvas */
+.retro-grid-bg {
+  background-image: radial-gradient(#1f1f1f14 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.dark .retro-grid-bg {
+  background-image: radial-gradient(#ffffff12 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 

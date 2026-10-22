@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { JSX } from "react/jsx-runtime";
 import { ModeToggle } from "../DarkMode";
-import { Terminal } from "lucide-react";
-
 export const FloatingNav = ({
   navItems,
   className,
@@ -17,11 +15,6 @@ export const FloatingNav = ({
   }[];
   className?: string;
 }) => {
-  const triggerCmdPalette = () => {
-    window.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true })
-    );
-  };
 
   return (
     <motion.div
@@ -61,19 +54,7 @@ export const FloatingNav = ({
       {/* Divider */}
       <span className="w-6 h-px bg-border/60 my-1" />
 
-      {/* Command Palette Quick Button */}
-      <button
-        onClick={triggerCmdPalette}
-        title="Command Palette (⌘K)"
-        className="
-          p-2.5 rounded-xl
-          text-primary bg-primary/10 hover:bg-primary/20
-          transition-all duration-200
-        "
-        data-cursor="pointer"
-      >
-        <Terminal size={18} />
-      </button>
+      {/* Theme Toggle */}
 
       {/* Theme Toggle */}
       <ModeToggle />

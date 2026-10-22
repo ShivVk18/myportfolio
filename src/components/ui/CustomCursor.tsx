@@ -12,12 +12,11 @@ export const CustomCursor = () => {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
+  const springConfig = { damping: 28, stiffness: 350, mass: 0.3 };
   const trailingX = useSpring(mouseX, springConfig);
   const trailingY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Check if device supports touch or user prefers reduced motion
     const checkMobile = () => {
       const touchDevice = window.matchMedia("(pointer: coarse)").matches;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -62,7 +61,7 @@ export const CustomCursor = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
-      {/* Outer Trailing Ring */}
+      {/* Outer Retro Precision Box */}
       <motion.div
         style={{
           x: trailingX,
@@ -71,21 +70,19 @@ export const CustomCursor = () => {
           translateY: "-50%",
         }}
         animate={{
-          scale: isHovered ? 1.8 : 1,
-          borderColor: isHovered
-            ? "var(--color-primary)"
-            : "rgba(255, 255, 255, 0.4)",
-          backgroundColor: isHovered ? "rgba(var(--color-primary-rgb), 0.15)" : "transparent",
+          scale: isHovered ? 1.6 : 1,
+          rotate: isHovered ? 45 : 0,
+          borderColor: isHovered ? "#FF5A1F" : "#1F1F1F",
         }}
         transition={{ duration: 0.15, ease: "easeOut" }}
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-primary/40 backdrop-blur-[1px] flex items-center justify-center"
+        className="fixed top-0 left-0 w-5 h-5 rounded-[2px] border border-[#1F1F1F] dark:border-[#FFFFFF]/60 flex items-center justify-center"
       >
         {isHovered && (
-          <div className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
+          <div className="w-1 h-1 bg-primary rounded-none" />
         )}
       </motion.div>
 
-      {/* Central Precision Dot */}
+      {/* Central Pixel Dot */}
       <motion.div
         style={{
           x: mouseX,
@@ -98,8 +95,9 @@ export const CustomCursor = () => {
           opacity: isHovered ? 0 : 1,
         }}
         transition={{ duration: 0.1 }}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_var(--color-primary)]"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-[#FF5A1F] rounded-none"
       />
     </div>
   );
 };
+

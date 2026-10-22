@@ -1,4 +1,4 @@
-import profilePic from './images.png'
+
 import express from './express.png'
 import cplus from './C++.png'
 import python from './python.png'
@@ -14,8 +14,12 @@ import emptrack from './emptrack.png'
 import ascendai from './AscendAi.png'
 import fastapi from './FastAPI (1).png'
 import fitfusion from './FitFusion.png'
+
+import pixelAvatar from './pixel-avatar.jpg'
+
+
 export {
-    profilePic,
+
     express,
     cplus,
     python,
@@ -30,5 +34,8 @@ export {
     ascendai,
     emptrack,
     fastapi,
-    fitfusion
+    fitfusion,
+    
+    pixelAvatar,
+    
 }

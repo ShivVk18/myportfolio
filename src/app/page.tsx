@@ -1,71 +1,58 @@
 'use client';
 
-import { useState } from "react";
-import PortfolioPreloader from "@/components/PreLoader";
+import { motion } from "framer-motion";
 import AboutMe from "@/components/sections/AboutMe";
 import Experience from "@/components/sections/Experience";
 import Hero from "@/components/sections/Hero";
 import Projects from "@/components/sections/Project";
 import { Skills } from "@/components/sections/Skills";
-import { FloatingNav } from "@/components/ui/floating-navbar";
-import { MobileBottomNav } from "@/components/ui/MobileBottomNav";
+import Contact from "@/components/sections/Contact";
+import { TopNav } from "@/components/ui/TopNav";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { NoiseMeshBackground } from "@/components/ui/NoiseMeshBackground";
-import { CommandPalette } from "@/components/ui/CommandPalette";
-import { navItems } from "@/data/navItems";
+import { MarqueeDivider } from "@/components/ui/MarqueeDivider";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
-    <main className="relative min-h-screen bg-background text-foreground transition-colors duration-500 overflow-hidden font-sans selection:bg-primary/25 selection:text-primary">
-      {/* Custom Interactive Ring/Dot Cursor */}
+    <motion.main
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="relative min-h-screen bg-background text-foreground transition-colors duration-300 overflow-x-hidden font-sans selection:bg-[#FF4D00] selection:text-white"
+    >
+      {/* Precision Pixel / Retro Crosshair Cursor */}
       <CustomCursor />
 
-      {/* Dynamic Animated Noise & Mesh Background */}
+      {/* Warm Subtle Paper Texture & Minimalist Drafting Grid */}
       <NoiseMeshBackground />
 
-      {/* Cmd+K Command Palette Modal */}
-      <CommandPalette />
-
-      <div className="relative z-10">
-        {/* Preloader if active */}
-        {isLoading && (
-          <PortfolioPreloader onComplete={() => setIsLoading(false)} />
-        )}
-
-        {!isLoading && (
-          <>
-            <FloatingNav navItems={navItems} />
-            <MobileBottomNav navItems={navItems} />
-          </>
-        )}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Editorial Top Navigation */}
+        <TopNav />
 
         {/* Hero Section */}
-        <section id="hero" className="min-h-screen flex items-center justify-center">
-          <Hero />
-        </section>
+        <Hero />
 
-        {/* About Me Section */}
-        <section id="about" className="min-h-screen flex items-center justify-center">
-          <AboutMe />
-        </section>
+        {/* Subtle Horizontal Typographic Marquee Divider */}
+        <MarqueeDivider
+          text="FULL-STACK DEVELOPER • REACT & NEXT.JS • NODE.JS & FASTAPI • POSTGRESQL • SYSTEMS ARCHITECTURE • AI INTEGRATIONS • BHOPAL, IN • SHIPPING REAL VALUE •"
+        />
 
-        {/* Skills Section */}
-        <section id="skills" className="min-h-screen flex items-center justify-center">
-          <Skills />
-        </section>
+        {/* About Me Section (01) */}
+        <AboutMe />
 
-        {/* Projects Section */}
-        <section id="projects" className="min-h-screen flex items-center justify-center">
-          <Projects />
-        </section>
+        {/* Skills & Tech Stack Section (02) */}
+        <Skills />
 
-        {/* Experience Section */}
-        <section id="experience" className="min-h-screen flex items-center justify-center">
-          <Experience />
-        </section>
+        {/* Selected Projects Case Archive (03) */}
+        <Projects />
+
+        {/* Work Experience Section (04) */}
+        <Experience />
+
+        {/* Contact & Footer Section (05) */}
+        <Contact />
       </div>
-    </main>
+    </motion.main>
   );
 }
