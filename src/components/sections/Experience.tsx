@@ -46,11 +46,16 @@ const experiences: ExperienceItem[] = [
 
 export const Experience = () => {
   return (
-    <section id="experience" className="relative w-full py-16 md:py-24 border-b-2 border-[#141414] dark:border-[#3A3832]">
+    <section id="experience" className="relative w-full py-16 md:py-24">
       <div className="max-w-[1140px] w-[90%] sm:w-[88%] mx-auto">
         
         {/* Section Header */}
         <div className="mb-10 sm:mb-14">
+          <div className="flex items-center gap-2 font-mono text-xs text-primary font-bold tracking-widest uppercase mb-2">
+            <span>02</span>
+            <span>{"//"}</span>
+            <span>EXPERIENCE</span>
+          </div>
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#141414] dark:text-[#F5F4EE] uppercase">
             WHERE I&apos;VE CONTRIBUTED.
           </h2>

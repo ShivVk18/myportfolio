@@ -14,7 +14,7 @@ export const MarqueeDivider: React.FC<MarqueeDividerProps> = ({
 }) => {
   return (
     <div
-      className={`w-full overflow-hidden border-y-2 border-[#141414] dark:border-[#3A3832] bg-[#F0EDE6] dark:bg-[#1A1A18] py-2.5 select-none ${className}`}
+      className={`w-full overflow-hidden bg-[#F0EDE6] dark:bg-[#1A1A18] py-2.5 select-none ${className}`}
       aria-hidden="true"
     >
       <div className="flex w-max animate-[marquee_28s_linear_infinite] whitespace-nowrap font-mono text-xs sm:text-sm font-bold tracking-wider text-[#141414] dark:text-[#F5F4EE]">

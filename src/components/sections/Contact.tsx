@@ -25,6 +25,11 @@ export const Contact = () => {
         
         {/* Minimal Editorial Invite */}
         <div className="space-y-4">
+          <div className="flex items-center gap-2 font-mono text-xs text-primary font-bold tracking-widest uppercase">
+            <span>04</span>
+            <span>{"//"}</span>
+            <span>CONTACT</span>
+          </div>
           <h2 className="font-heading text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-[#141414] dark:text-[#F5F4EE] uppercase leading-[0.9]">
             LET&apos;S BUILD <br />
             SOMETHING.
