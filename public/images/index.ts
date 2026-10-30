@@ -16,6 +16,8 @@ import fastapi from './FastAPI (1).png'
 import fitfusion from './FitFusion.png'
 
 import pixelAvatar from './pixel-avatar.jpg'
+import ascendaiFull from './ascendai-full.jpg'
+import fitfusionFull from './fitfusion-full.jpg'
 
 
 export {
@@ -37,5 +39,7 @@ export {
     fitfusion,
     
     pixelAvatar,
+    ascendaiFull,
+    fitfusionFull,
     
 }

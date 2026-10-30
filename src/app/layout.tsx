@@ -1,53 +1,38 @@
-import type { Metadata } from "next";
-import { Space_Grotesk, Outfit, Space_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ClientLayout from "./ClientLayout";
-import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme-provider";
+import { profile } from "@/data/profile";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-});
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
-
-const spaceMono = Space_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+const title = `${profile.name} — ${profile.title}`;
 
 export const metadata: Metadata = {
-  title: "Shivansh Saxena — Full-Stack Developer",
-  description: "Full-Stack Engineer & Product Builder. Minimal editorial portfolio with clean architecture, thoughtful UX, and real-world impact.",
-  icons: {
-    icon: { url: "/icon.png", type: "image/png", sizes: "512x512" },
-    apple: "/icon.png",
-  },
+  metadataBase: new URL(profile.siteUrl),
+  title,
+  description: profile.intro,
+  authors: [{ name: profile.name }],
+  openGraph: { type: "website", title, description: profile.intro, siteName: profile.name, locale: "en_IN" },
+  twitter: { card: "summary_large_image", title, description: profile.intro },
+  icons: { icon: "/icon.png", apple: "/icon.png" },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F5F3EF" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
+  ],
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${spaceGrotesk.variable} ${outfit.variable} ${spaceMono.variable} antialiased selection:bg-[#FF5A1F] selection:text-white`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ClientLayout>{children}</ClientLayout>
-          <Toaster position="top-right" />
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {/* Defaults to the system theme; the choice is saved to localStorage. The inline script prevents a flash. */}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
         </ThemeProvider>
       </body>
     </html>
