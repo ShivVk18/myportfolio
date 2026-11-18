@@ -11,6 +11,7 @@ import { ScrollRuler } from "@/components/ScrollRuler";
 import { CommandPalette } from "@/components/CommandPalette";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Toaster } from "@/components/ui/toast";
 
 // What goes in each section: `body` sits in cols 3–12, `after` spans the full width below it.
 const content: Record<SectionId, { body?: React.ComponentType; after?: React.ComponentType }> = {
@@ -38,6 +39,7 @@ export default function Home() {
         {sections.map((s) => {
           const { body: Body, after: After } = content[s.id];
           const title = "title" in s ? s.title : undefined;
+          const titleMuted = "titleMuted" in s ? s.titleMuted : undefined;
           return (
             <Section
               key={s.id}
@@ -45,6 +47,7 @@ export default function Home() {
               number={s.number}
               name={s.name}
               title={title}
+              titleMuted={titleMuted}
               after={After ? <After /> : undefined}
             >
               {Body ? <Body /> : null}
@@ -57,6 +60,7 @@ export default function Home() {
       <CommandPalette />
       <CustomCursor />
       <SmoothScroll />
+      <Toaster position="bottom-center" />
     </>
   );
 }

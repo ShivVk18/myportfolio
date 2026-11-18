@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { profile } from "@/data/profile";
 import { rise } from "@/lib/motion";
 import { Clock } from "./Clock";
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemeToggle } from "./ui/theme-toggle";
 import { PaletteHint } from "./CommandPalette";
 
 export function Identity() {
@@ -46,8 +46,8 @@ export function Identity() {
       <motion.div {...rise(5)} className="col-content mt-6">
         <span className="mono-label inline-flex items-center gap-2.5 rounded-full border border-hairline px-3 py-1.5 text-muted">
           <span className="relative flex size-2" aria-hidden="true">
-            <span className="pulse-ring absolute inset-0 rounded-full bg-accent" />
-            <span className="relative size-2 rounded-full bg-accent" />
+            <span className="pulse-ring absolute inset-0 rounded-full bg-emerald-500" />
+            <span className="relative size-2 rounded-full bg-emerald-500" />
           </span>
           {profile.status}
         </span>

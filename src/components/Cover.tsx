@@ -11,6 +11,7 @@ import {
 } from "motion/react";
 import { cover } from "@/data/profile";
 import { EASE, rise } from "@/lib/motion";
+import { AsciiButterflies } from "./ui/ascii-butterflies";
 
 const GLOW = 520;
 
@@ -76,41 +77,41 @@ export function Cover() {
               y: glowY,
               width: GLOW,
               height: GLOW,
-              background: "radial-gradient(circle, rgb(232 100 60 / 0.16), transparent 62%)",
+              background: "radial-gradient(circle, color-mix(in srgb, var(--ink) 7%, transparent), transparent 62%)",
             }}
+          />
+
+          {/* pixel-ui: two mono ASCII butterflies drift over the blueprint. Click scatters them. */}
+          <AsciiButterflies
+            count={2}
+            variant="mono"
+            aria-hidden="true"
+            className="absolute inset-0 bottom-9 opacity-40 sm:opacity-70 dark:sm:opacity-60"
           />
 
           <div className="mono-label absolute right-5 top-4 flex gap-3 text-muted tabular-nums" aria-hidden="true">
             <span>{active >= 0 ? String(active + 1).padStart(2, "0") : "--"} / {String(words.length).padStart(2, "0")}</span>
-            <span className="w-14 text-accent-text">{activeWord}</span>
+            <span className="w-14 text-ink">{activeWord}</span>
           </div>
 
-          <div className="grid-12 relative h-full content-center px-5 pb-8 sm:px-8 lg:px-0">
+          <div className="grid-12 pointer-events-none relative h-full content-center px-5 pb-8 sm:px-8 lg:px-0">
             <p className="col-content text-[clamp(2.6rem,7.4vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
               <span className="sr-only">{words.join(" ")}</span>
               <span aria-hidden="true" className="flex flex-wrap gap-x-[0.26em]">
                 {words.map((w, i) => (
                   <span key={w} className="relative inline-block overflow-hidden pb-[0.14em]">
                     <motion.span
-                      className="relative inline-block"
+                      className={`relative inline-block transition-colors duration-500 ${active >= 0 && active !== i ? "text-ink/25" : "text-ink"}`}
                       initial={reduce ? { opacity: 0 } : { y: "105%" }}
                       animate={reduce ? { opacity: 1 } : { y: 0 }}
                       transition={{ duration: 0.8, ease: EASE, delay: 0.25 + i * 0.12 }}
                     >
                       {w}
-                      <motion.span
-                        className="absolute inset-0 text-accent"
-                        initial={false}
-                        animate={{ opacity: active === i ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: EASE }}
-                      >
-                        {w}
-                      </motion.span>
                     </motion.span>
                     {active === i && (
                       <motion.span
                         layoutId="cover-underline"
-                        className="absolute bottom-[0.06em] left-0 h-[3px] w-[calc(100%-0.25em)] bg-accent"
+                        className="absolute bottom-[0.06em] left-0 h-[2px] w-[calc(100%-0.25em)] bg-ink"
                         transition={{ duration: 0.6, ease: EASE }}
                       />
                     )}

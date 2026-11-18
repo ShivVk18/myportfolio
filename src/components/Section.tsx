@@ -30,30 +30,19 @@ export function Section({ id, number, name, title, titleMuted, children, after }
       className="grid-12 relative mt-20 scroll-mt-8 pt-8 lg:mt-30"
     >
       {/* Divider draws left → right with a dot riding along it. Clipped so the dot never widens the page. */}
-      <div aria-hidden="true" className="absolute inset-x-0 -top-1 h-2 overflow-hidden">
-        <motion.span
-          className="absolute inset-x-0 top-1 h-px origin-left bg-hairline"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: inView ? 1 : 0 }}
-          transition={{ duration: reduce ? 0 : 1.1, ease: EASE }}
-        />
-        {!reduce && (
-          <motion.span
-            className="absolute inset-x-0 top-1"
-            initial={{ x: "0%", opacity: 0 }}
-            animate={inView ? { x: "100%", opacity: [0, 1, 1, 0] } : {}}
-            transition={{ duration: 1.1, ease: EASE, opacity: { times: [0, 0.1, 0.8, 1], duration: 1.1 } }}
-          >
-            <span className="absolute left-0 top-0 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent" />
-          </motion.span>
-        )}
-      </div>
+      <motion.div
+        aria-hidden="true"
+        className="bg-stripes absolute inset-x-0 -top-3 h-3 origin-left border-y border-hairline"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: inView ? 1 : 0 }}
+        transition={{ duration: reduce ? 0 : 1.1, ease: EASE }}
+      />
 
       <div className="col-gutter lg:sticky lg:top-[120px] lg:self-start">
         <MaskLines
           as="h2"
           id={`${id}-title`}
-          lines={[<span key="n" className="text-accent-text">{number}</span>, name]}
+          lines={[<span key="n" className="text-ink">{number}</span>, name]}
           className="mono-label text-muted"
         />
       </div>

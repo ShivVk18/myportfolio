@@ -60,7 +60,7 @@ export function Experience() {
         <motion.span className="absolute inset-0 origin-top bg-accent" style={{ scaleY: reduce ? 1 : fill }} />
         {!reduce && (
           <motion.span className="absolute inset-x-0 top-0 h-full" style={{ y: headY }}>
-            <span className="absolute left-1/2 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_12px_3px_rgb(232_100_60/0.55)]" />
+            <span className="absolute left-1/2 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_0_4px_var(--paper)]" />
           </motion.span>
         )}
       </div>

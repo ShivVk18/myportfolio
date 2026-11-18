@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { contact, profile } from "@/data/profile";
 import { links } from "@/data/links";
-import { useCopy } from "@/lib/useCopy";
 import { Reveal } from "./Reveal";
+import { toast } from "./ui/toast";
 
 const LATE = (h: number) => h >= 23 || h < 7;
 
@@ -33,11 +33,14 @@ function LocalTime() {
 const inline = "underline decoration-muted/60 decoration-1 underline-offset-[5px] transition-colors hover:decoration-accent";
 
 export function Contact() {
-  const { copied, copy } = useCopy(1500);
-
   const onEmail = async () => {
-    const ok = await copy(links.email);
-    if (!ok) window.location.href = `mailto:${links.email}`;
+    try {
+      await navigator.clipboard.writeText(links.email);
+      toast.success("Email copied", { id: "email", description: links.email });
+    } catch {
+      // Clipboard blocked (insecure origin / permissions): fall back to the mail client.
+      window.location.href = `mailto:${links.email}`;
+    }
   };
 
   return (
@@ -47,7 +50,7 @@ export function Contact() {
       </Reveal>
 
       <Reveal className="mt-6">
-        {/* Click copies. The underline turns into "copied" for 1.5s. */}
+        {/* Click copies; a pixel-ui toast confirms it. */}
         <button
           type="button"
           onClick={onEmail}
@@ -55,20 +58,8 @@ export function Contact() {
           className="relative pb-1 text-left text-accent-text [overflow-wrap:anywhere]"
         >
           {links.email}
-          <span
-            aria-hidden="true"
-            className={`absolute inset-x-0 bottom-0 h-px bg-current transition-opacity duration-200 ${copied ? "opacity-0" : "opacity-100"}`}
-          />
-          <span
-            aria-hidden="true"
-            className={`mono-label absolute left-0 top-full mt-0.5 text-ink transition-opacity duration-200 ${copied ? "opacity-100" : "opacity-0"}`}
-          >
-            copied
-          </span>
+          <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-current" />
         </button>
-        <span className="sr-only" aria-live="polite">
-          {copied ? "Email copied" : ""}
-        </span>
       </Reveal>
 
       <Reveal className="mt-8">

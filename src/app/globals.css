@@ -11,35 +11,41 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-hairline: var(--hairline);
-  --color-accent: #e8643c;
+  --color-accent: var(--accent);
   --color-accent-text: var(--accent-text);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root {
-  --paper: #f5f3ef;
-  --card: #faf9f6;
-  --ink: #111111;
-  --muted: #6b6b6b; /* 4.9:1 on paper */
-  --hairline: #e2dfd8;
-  --grid-dot: rgb(17 17 17 / 0.2);
-  --grid-line: rgb(17 17 17 / 0.06);
-  --accent-text: #b4441f; /* accent darkened for small text, 5:1 */
+  /* Monochrome: no hue anywhere. "accent" is just full-strength ink. */
+  --paper: #fafaf9;
+  --card: #ffffff;
+  --ink: #18181b;
+  --muted: #5f5f66; /* 6.2:1 on paper */
+  --hairline: #e7e7e4;
+  --grid-dot: rgb(24 24 27 / 0.16);
+  --grid-line: rgb(24 24 27 / 0.05);
+  --stripe: rgb(24 24 27 / 0.06);
+  --accent: #18181b;
+  --accent-text: #18181b;
   --kv: 11rem; /* shared key column for Experience / Stack */
   color-scheme: light;
 }
 
 .dark {
-  --paper: #111111;
-  --card: #151515;
-  --ink: #ededed;
-  --muted: #8a8a8a; /* 5.6:1 on paper */
-  --hairline: #222222;
-  --grid-dot: rgb(237 237 237 / 0.12);
-  --grid-line: rgb(237 237 237 / 0.035);
-  --accent-text: #e8643c;
+  --paper: #0a0a0a;
+  --card: #111111;
+  --ink: #f4f4f5;
+  --muted: #a1a1aa; /* 7.9:1 on paper */
+  --hairline: #1f1f1f;
+  --grid-dot: rgb(244 244 245 / 0.1);
+  --grid-line: rgb(244 244 245 / 0.03);
+  --stripe: rgb(244 244 245 / 0.055);
+  --accent: #f4f4f5;
+  --accent-text: #f4f4f5;
   color-scheme: dark;
 }
 
@@ -58,12 +64,12 @@ body {
 }
 
 ::selection {
-  background: rgb(232 100 60 / 0.25);
+  background: color-mix(in srgb, var(--ink) 14%, transparent);
   color: inherit;
 }
 
 :focus-visible {
-  outline: 2px solid #e8643c;
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -88,6 +94,12 @@ body::after {
 ::view-transition-new(root) {
   animation-duration: 0.45s;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Circular reveal (pixel-ui theme toggle): no cross-fade, the new snapshot is clipped in from the click. */
+html.theme-reveal::view-transition-old(root),
+html.theme-reveal::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 /* Custom cursor hides the native one, except where you type. */
@@ -155,6 +167,11 @@ html.custom-cursor :is(input, textarea, [contenteditable="true"]) {
     background-position: -10px -10px, -1px -1px, -1px -1px;
   }
 
+  /* Diagonal hatch for divider bands. */
+  .bg-stripes {
+    background-image: repeating-linear-gradient(315deg, var(--stripe) 0 1px, transparent 1px 7px);
+  }
+
   /* Underline that grows from the left; transform only. */
   .grow-line {
     position: relative;
@@ -166,7 +183,7 @@ html.custom-cursor :is(input, textarea, [contenteditable="true"]) {
     right: 0;
     bottom: -1px;
     height: 1px;
-    background: #e8643c;
+    background: var(--ink);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
@@ -180,7 +197,7 @@ html.custom-cursor :is(input, textarea, [contenteditable="true"]) {
 
 /* Conic "beam" that runs around a card border on hover. */
 .beam {
-  background: conic-gradient(from 0deg, transparent 0deg 240deg, rgb(232 100 60 / 0.15) 290deg, #e8643c 345deg, transparent 360deg);
+  background: conic-gradient(from 0deg, transparent 0deg 240deg, color-mix(in srgb, var(--ink) 12%, transparent) 290deg, var(--ink) 345deg, transparent 360deg);
   animation: spin 3s linear infinite;
   animation-play-state: paused;
 }

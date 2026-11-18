@@ -23,9 +23,9 @@ export const cover = {
 
 // Section order, ids, gutter labels and display titles. `key` is the "g + key" shortcut.
 export const sections = [
-  { id: "experience", number: "01", name: "Experience", key: "e", title: "Where I've worked" },
-  { id: "work", number: "02", name: "Work", key: "w", title: "Selected work" },
-  { id: "stack", number: "03", name: "Stack", key: "s", title: "What I build with" },
+  { id: "experience", number: "01", name: "Experience", key: "e", title: "Where I've", titleMuted: "worked" },
+  { id: "work", number: "02", name: "Work", key: "w", title: "Selected", titleMuted: "work" },
+  { id: "stack", number: "03", name: "Stack", key: "s", title: "What I", titleMuted: "build with" },
   { id: "contact", number: "04", name: "Contact", key: "c" },
 ] as const satisfies readonly { id: string; number: string; name: string; key: string; title?: string; titleMuted?: string }[];
 
