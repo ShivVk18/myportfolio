@@ -17,34 +17,16 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "ascendai",
-    index: "01",
-    title: "AscendAI",
-    tagline: "AI-Powered Career Coach",
-    category: "AI · Career",
-    bullets: [
-      "Generates career roadmaps, runs skill-gap analysis against real job descriptions and produces ATS-tailored resumes.",
-      "AI mock interviews with real-time feedback on technical answers and communication.",
-    ],
-    tags: ["LLM Integration", "Skill-gap analysis", "Mock interviews"],
-    links: [
-      { label: "GitHub", href: "https://github.com/ShivVk18/ai-career-buddy" },
-      { label: "Live", href: "https://ascendai-two.vercel.app/" },
-    ],
-    image: ascendaiFull,
-    tint: "#E8643C",
-  },
-  {
     slug: "fitfusion",
-    index: "02",
+    index: "01",
     title: "FitFusion AI",
     tagline: "Autonomous Health & Fitness Platform",
     category: "AI · Health",
     bullets: [
-      "Full-stack AI app generating personalized workouts, nutrition plans and recovery analysis from user data.",
-      "Schema validation with fallbacks on every LLM response so malformed AI output never reaches the UI; analytics dashboards and a conversational AI assistant.",
+      "Full-stack Generative AI application generating personalized workouts, nutrition plans and recovery analysis from user data.",
+      "Enforced schema validation with fallbacks on every LLM response so malformed AI output never reaches the UI; added analytics dashboards and a conversational AI assistant.",
     ],
-    tags: ["Schema-validated LLM output", "Dashboards", "AI assistant"],
+    tags: ["Generative AI", "Schema validation", "AI assistant"],
     links: [
       { label: "Backend", href: "https://github.com/ShivVk18/fitfusion-backend" },
       { label: "Frontend", href: "https://github.com/ShivVk18/fitfusion-frontend" },
@@ -52,6 +34,24 @@ export const projects: Project[] = [
     ],
     image: fitfusionFull,
     tint: "#4F9D7E",
+  },
+  {
+    slug: "ascendai",
+    index: "02",
+    title: "AscendAI",
+    tagline: "AI-Powered Career Coach",
+    category: "AI · Career",
+    bullets: [
+      "LLM-powered platform that generates career roadmaps, performs skill-gap analysis against real job descriptions and produces ATS-tailored resumes.",
+      "AI mock interviews with real-time feedback on technical answers and communication.",
+    ],
+    tags: ["LLM-powered", "Skill-gap analysis", "AI mock interviews"],
+    links: [
+      { label: "GitHub", href: "https://github.com/ShivVk18/ai-career-buddy" },
+      { label: "Live", href: "https://ascendai-two.vercel.app/" },
+    ],
+    image: ascendaiFull,
+    tint: "#E8643C",
   },
   {
     slug: "splitmates",

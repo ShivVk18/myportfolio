@@ -3,15 +3,14 @@ import { pixelAvatar } from "../../public/images";
 
 export const profile = {
   name: "Shivansh Saxena",
-  title: "Full-Stack Engineer",
-  subtitle: "Full-stack engineer · Madhya Pradesh, IN",
+  title: "Full-Stack & GenAI Engineer",
+  subtitle: "MERN & GenAI engineer · Madhya Pradesh, IN",
   location: "Madhya Pradesh, IN",
- 
   timezone: "Asia/Kolkata",
   timezoneLabel: "IST",
   avatar: pixelAvatar as StaticImageData,
   intro:
-    "Full-stack engineer who enjoys taking features from idea to production — building web apps and Generative AI features with a focus on reliable AI output, clean code and smooth UX.",
+    "Full-stack engineer building across the MERN stack and Generative AI — from RAG pipelines and multi-agent LLM systems to fast React and Next.js apps — with a focus on reliable AI output, clean APIs and smooth UX.",
   status: "Available for work",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
 };

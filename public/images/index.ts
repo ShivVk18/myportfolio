@@ -1,45 +1,6 @@
+import splitmates from "./Splitmates.png";
+import pixelAvatar from "./pixel-avatar.jpg";
+import ascendaiFull from "./ascendai-full.jpg";
+import fitfusionFull from "./fitfusion-full.jpg";
 
-import express from './express.png'
-import cplus from './C++.png'
-import python from './python.png'
-import postgre from './postgre.png'
-import javascript from './javascript.png'
-import mongo  from  './mongo.png'
-import nextjs from './Nextjs.png' 
-import node from './node.png'
-import react from './react.png'
-import tailwind from './tailwind.png'
-import splitmates from './Splitmates.png'
-
-import ascendai from './AscendAi.png'
-import fastapi from './FastAPI (1).png'
-import fitfusion from './FitFusion.png'
-
-import pixelAvatar from './pixel-avatar.jpg'
-import ascendaiFull from './ascendai-full.jpg'
-import fitfusionFull from './fitfusion-full.jpg'
-
-
-export {
-
-    express,
-    cplus,
-    python,
-    postgre,
-    javascript,
-    mongo,
-    nextjs,
-    node,
-    react,
-    tailwind,
-    splitmates,
-    ascendai,
-   
-    fastapi,
-    fitfusion,
-    
-    pixelAvatar,
-    ascendaiFull,
-    fitfusionFull,
-    
-}
+export { splitmates, pixelAvatar, ascendaiFull, fitfusionFull };

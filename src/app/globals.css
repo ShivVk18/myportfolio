@@ -263,3 +263,21 @@ html.custom-cursor :is(input, textarea, [contenteditable="true"]) {
     animation: none;
   }
 }
+
+/* Cover photo: very slow breathing zoom. Uses `scale` so it composes with the parallax transform. */
+@keyframes cover-drift {
+  from {
+    scale: 1.02;
+  }
+  to {
+    scale: 1.08;
+  }
+}
+.cover-drift {
+  animation: cover-drift 28s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover-drift {
+    animation: none;
+  }
+}

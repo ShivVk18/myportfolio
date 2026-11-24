@@ -1,17 +1,29 @@
 export const skills: { category: string; items: string[] }[] = [
-  { category: "Languages", items: ["JavaScript (ES6+)", "Python", "C++", "SQL"] },
+  { category: "Languages", items: ["Python", "JavaScript (ES6+)", "SQL", "C++"] },
   {
-    category: "Frontend",
-    items: ["React.js", "Next.js", "React Native", "HTML5", "CSS3", "Tailwind CSS", "Responsive Design", "Recharts"],
+    category: "AI / GenAI",
+    items: [
+      "LLM APIs",
+      "LLM Integration",
+      "Prompt Engineering",
+      "Agentic AI (LangGraph, multi-agent pipelines)",
+      "RAG Pipelines",
+      "Document Chunking",
+      "Embeddings",
+      "Structured Output Validation",
+    ],
   },
   {
     category: "Backend",
-    items: ["Node.js", "Express.js", "FastAPI", "RESTful APIs", "WebSockets", "Microservices fundamentals"],
+    items: ["FastAPI (async)", "SQLAlchemy", "RESTful APIs", "JWT Authentication", "Node.js", "Express.js", "WebSockets"],
   },
-  { category: "AI / GenAI", items: ["LLM Integration", "Agentic AI (LangGraph)", "RAG Pipelines"] },
+  {
+    category: "Frontend",
+    items: ["Next.js", "React.js", "React Native", "Tailwind CSS", "Shadcn UI", "React Query", "Zod", "Recharts"],
+  },
   { category: "Databases", items: ["PostgreSQL", "MySQL", "MongoDB", "Prisma ORM"] },
   {
-    category: "Tools & practices",
-    items: ["Git", "GitHub", "Docker", "Linux", "Postman", "Notion", "Agile/Scrum", "Code Reviews", "SDLC", "Performance Optimization"],
+    category: "Testing & Tools",
+    items: ["Git", "GitHub", "Playwright", "axe-core", "Docker", "Linux", "Postman", "Agile/Scrum", "Code Reviews"],
   },
 ];

@@ -12,14 +12,16 @@ export type Job = {
 export const experience: Job[] = [
   {
     period: "Nov 2025 – Present",
-    role: "Graduate Engineer Trainee",
+    role: "Graduate Engineer Trainee (MERN Developer)",
     company: "MPSEDC",
     companyFull: "M.P. State Electronics Development Corporation Ltd",
     mode: "On-site",
     bullets: [
-      "Develop responsive React.js interfaces for a state Housing ERP, translating client requirements into reusable, component-based UI modules.",
-      "Improved page load performance by ~30% through lazy loading, code splitting, memoization and leaner state management.",
-      "Ship features in two-week Agile sprints with peer code reviews on a CMS-based enterprise application.",
+      "Build features across the MERN stack for a state Housing ERP, turning client requirements into reusable React.js modules; improved page load by ~30% through lazy loading, code splitting and memoization.",
+      "Developed SQL-backed REST APIs for modules that needed relational data, alongside MongoDB services, in two-week Agile sprints with peer code reviews.",
+      "Built an internal SRS Document Parser using RAG for the engineering team that extracts key information from Software Requirement Specifications and maps it to the company's standard SRS format.",
+      "Designed a conditional chunking strategy that adapts to each document's structure and content instead of a fixed chunk size, keeping retrieval accurate on 100–500 page documents.",
+      "Adopted by the team to parse SRS and related technical documentation, making requirement analysis faster and more consistent.",
     ],
     stat: { prefix: "~", value: 30, suffix: "%", label: "faster page loads" },
   },

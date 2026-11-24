@@ -44,11 +44,7 @@ export function Identity() {
       </motion.p>
 
       <motion.div {...rise(5)} className="col-content mt-6">
-        <span className="mono-label inline-flex items-center gap-2.5 rounded-full border border-hairline px-3 py-1.5 text-muted">
-          <span className="relative flex size-2" aria-hidden="true">
-            <span className="pulse-ring absolute inset-0 rounded-full bg-emerald-500" />
-            <span className="relative size-2 rounded-full bg-emerald-500" />
-          </span>
+        <span className="mono-label inline-flex items-center rounded-full border border-hairline px-3 py-1.5 text-muted">
           {profile.status}
         </span>
       </motion.div>

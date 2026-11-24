@@ -70,7 +70,7 @@ export function Contact() {
         Elsewhere:{" "}
         <a href={links.github} target="_blank" rel="noopener noreferrer" className={inline}>GitHub</a>,{" "}
         <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className={inline}>LinkedIn</a>, or grab my{" "}
-        <a href={links.resume} target="_blank" rel="noopener noreferrer" className={inline}>resume</a>.
+        <a href={links.resume} className={inline}>resume</a>.
       </Reveal>
 
       <Reveal className="mt-14 flex items-center gap-3">

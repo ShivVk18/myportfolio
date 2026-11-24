@@ -7,7 +7,7 @@ import { Experience } from "@/components/Experience";
 import { Stack } from "@/components/Stack";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
-import { ScrollRuler } from "@/components/ScrollRuler";
+import { BottomNav } from "@/components/BottomNav";
 import { CommandPalette } from "@/components/CommandPalette";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -30,9 +30,9 @@ export default function Home() {
       >
         Skip to work
       </a>
-      {/* Symmetric padding keeps the column centred (full-bleed rows rely on it) and clears the ruler on lg. */}
-      <main className="relative z-10 mx-auto w-full max-w-[1180px] px-4 pt-4 sm:px-8 sm:pt-8 lg:px-28 min-[1440px]:px-16">
-        <header>
+      {/* Symmetric padding keeps the column centred (full-bleed rows rely on it). */}
+      <main className="relative z-10 mx-auto w-full max-w-[1180px] px-4 pt-4 pb-24 sm:px-8 sm:pt-8 lg:px-28 min-[1440px]:px-16">
+        <header id="top">
           <Cover />
           <Identity />
         </header>
@@ -56,11 +56,12 @@ export default function Home() {
         })}
         <Footer />
       </main>
-      <ScrollRuler />
+      <BottomNav />
       <CommandPalette />
       <CustomCursor />
       <SmoothScroll />
-      <Toaster position="bottom-center" />
+      {/* Lifted so toasts clear the bottom nav. */}
+      <Toaster position="bottom-center" className="bottom-24" />
     </>
   );
 }
